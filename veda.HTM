@@ -1,0 +1,1895 @@
+<HTML>
+
+<HEAD>
+
+<HEAD>
+<TITLE> The Veda system's Home Page </TITLE> 
+</HEAD>
+<BODY>
+<i>This page is under construction now.</i>
+<hr>
+<CENTER><B><FONT SIZE=5>The Veda project<BR>
+</FONT></B></CENTER>
+<p><b>
+    The advent of computer and development of contemporary
+ mathematics made real the Leibniz's dream about a practical
+  formal mathematical language (the term "practical formal
+  mathematical language" was coined by V.M. Glushkov
+  (see the reference [Gl72] in the paper below), who wrote that
+ a practical formal mathematical language is to classical
+ (e.g. first-order) logical languages as contemporary programming
+  languages (e.g. Pascal) are to "languages"
+ of Turing machines or Markov normal algorithms).
+ So "practical" means that
+usual mathematical texts can be relatively easy
+translated (by humans) into this language.
+ <p>
+ It is clear that such a language should as simple as possible
+ (yet sufficiently powerful).<p>
+ An obvious idea to attain the simplicity is to select a relatively
+  small number of primary names (denoting the most fundamental 
+logical and mathematical notions) and provide simple and powerful 
+mechanisms for defining new names. It means that language
+constructions for definitions maybe are the most important
+language constructs in a practical formal mathematical language
+(unlike to the classical logical languages which have no language
+constructs for definitions).<p>
+<font size=4>The main goal of the Veda project has been
+ to design(and experimentally implement) a simple (but sufficietly
+  powerful) practical formal mathematical language.</font>
+</b><p>
+This goal is one of the goals of the
+<a href="http://www.mcs.anl.gov/qed/"> QED Project </a> so
+the Veda project can be considered as a part of the QED project.<p>
+
+Below is a draft paper describing the  state of the
+Veda project on October, 1996.
+
+<p><b>
+Please send any comments on the paper (as well as
+suggestions of new language constructs)
+to vm@acm.org</b>
+<hr>
+<P>
+<CENTER><B><FONT SIZE=5>Veda - A
+High-Level Proof-Checking System<BR>
+</FONT></B></CENTER>
+<P>
+<CENTER>Victor  Makarov<BR>
+</CENTER>
+<P>
+<CENTER>NYANA</CENTER>
+<P>
+<CENTER>vm@acm.org<BR>
+</CENTER>
+<P>
+<FONT SIZE=3> <B>Abstract.</B>  Veda is a high-level proof-checking
+system intended mainly to support <B>Ve</B>rified <B>d</B>esign
+of <B>a</B>lgorithms. The system has both a high-level input language
+and high-level inference rules. Main components of the Veda system
+are:</FONT>
+<P>
+<FONT SIZE=3>1) The Veda language - the input language of the
+system; the language is relatively small but  sufficiently  powerful
+( its expressive possibilities  are comparable with such of the
+Z specification language);</FONT>
+<P>
+<FONT SIZE=3>2) A translator from the Veda language into an inner
+representation;</FONT>
+<P>
+<FONT SIZE=3>3) A type checker (the Veda language is a strongly
+typed language);</FONT>
+<P>
+<FONT SIZE=3>4) A simplifier (so the high-level inference rule
+&quot;simplify&quot; is implemented);</FONT>
+<P>
+<FONT SIZE=3>5) A proof checker (both high-level and low-level
+rules of inference are used);</FONT>
+<P>
+<FONT SIZE=3>6) A resolution theorem prover (so the high-level
+inference rule &quot;logic&quot; - i.e. &quot;logically follows&quot;
+- is implemented);</FONT>
+<P>
+<FONT SIZE=3>7) A package of programs for operations with multivariable
+polynomials.</FONT>
+<P>
+<FONT SIZE=3>   The Veda system now works in an experimental mode
+on IBM PC. One of the first proofs checked by the Veda system
+has been a proof of a theorem from the theory of context-free
+grammars - this theorem is the foundation of an effective algorithm
+used in constructing of LR(1)-parsers.   <BR>
+</FONT>
+<P> <b>Content</b> <P>
+<a href="#introduction">1 Introduction<br></a>
+<a href="#review">2 A review of the Veda language<BR></a>
+<a href="#some">3 Some auxiliary notions<br></a>
+<a href="#modules">4 Modules<br></a>
+<a href="#scope">5 Scope of names<br></a> 
+<a href="#qualified">6 Qualified names<br></a> 
+<a href="#terms">7 Terms<br></a> 
+<a href="#writing">8 Writing proofs<br></a> 
+<a href="#definitions">9 Definitions of some standard names<br></a>
+<a href="#examples">10 Some examples of using the Veda system<br></a> 
+<a href="#prim">10.1 The set of all prime numbers is infinite<br></a>
+<a href="#square">10.2 The sum of squares<br></a>
+<a href="#mboard">10.3 The mutilated checkboard problem<br></a> 
+<a href="#cfg">10.4 A theorem from the theory of context-free grammars<br></a>
+<a href="#conclusion"> Conclusion<br></a>
+<a href="#references">References<br></a> 
+<a name="introduction"></a>
+<P>
+1   <B>Introduction<BR>
+</B>
+<P>
+   Formal methods are now a well established approach to software
+development. High-level proof-checking systems (for instance,
+ the Boyer-Moore theorem prover [Bo88], HOL [Go93]) and various
+tools supporting such specification languages as LSL [Gu93], META-IV
+[Jo90, Jo91]  or Z [Sp92] are among tools supporting formal methods.
+But for better acceptance of formal methods by practitioners more
+powerful such tools are needed [Di96]. (For a proof-checking system
+its power is determined by both the level of its input language
+and the degree of automation of theorem proving in the system
+[Ru96]).
+<P>
+  The Veda system is a high-level proof-checking system intended
+mainly to support <B>Ve</B>rified  <B>d</B>esign of <B>a</B>lgorithms
+(but it also may be used in other areas for instance in mathematics
+education). Main components of the Veda system are:
+<P>
+1) The Veda  language  -  the input language of the system; the
+language is relatively small(see below) but  sufficiently powerful
+( its expressive possibilities  are comparable for instance with
+such of the Z specification language);
+<P>
+2) A translator from the Veda language into an inner representation;
+<P>
+3) A type checker (the Veda language is a strongly typed language);
+<P>
+4) A simplifier (so the high-level inference rule &quot;simplify&quot;
+is implemented);
+<P>
+5) A proof checker (both high-level and low-level rules of inference
+are used);
+<P>
+6) A resolution theorem prover (so the high-level inference rule
+&quot;logic&quot; - i.e. &quot;logically follows&quot; - is implemented);
+<P>
+7) A package of programs for operations with multivariable polynomials
+- it used by the simplifier.
+<P>
+    The Veda system has in particular the following features:
+<P>
+a) Definitions in the Veda language play a central role (see the
+next section); in particular operations over definitions are possible
+and definitions may be used in constructing of other terms. This
+approach helped to simplify  the Veda language.
+<P>
+b) The Veda language has dependent types [Ba90]. 
+<P>
+c) As the Boyer-Moore theorem prover (but in contrast to HOL)
+the Veda system requires all its input from a text file and runs
+without interactive user input during the proof-checking process
+(in [Ko92] it was marked as a merit of the Boyer-Moore theorem
+prover).
+<P>
+   The Veda system is written in C++ (about 10,000 lines) and it
+works in an experimental mode on IBM PC.
+One of the first proofs checked by the Veda system was a
+proof of a theorem from the theory of context-free grammars -
+this theorem is the foundation of an effective algorithm used
+in constructing of LR(1)-parsers (see section 10).           
+          <BR>
+
+<a name="review"></a>
+<P>
+<B>2  A review of the Veda language<BR>
+</B>
+<P>
+   An early version of the Veda language was briefly described
+in [Ma92] (there it was named as MSL). From then the language
+has been totally redesigned. The main purpose of the redesign
+has been to simplify the language by choosing a small number of
+built-in language constructs and names which should allow to <U>define</U>
+ all other necessary names. (This idea was successfully applied
+for instance in the design of the programming language C, where
+facilities for input-output are not a part of the language but
+can be defined as powerful as one wishes whereas in many other
+programming languages (for example PL/1) facilities  for input-output
+are built-in thus complicating the languages and their compilers).
+<P>
+   The main built-in language constructs  are <I>definitions</I>.
+A <I>definition</I> is either a definition of  constants or a
+definition of variables.
+<P>
+   A definition of a variable x of type t may be written as x:t.
+Now this definition can be used for constructing other terms (in
+Veda everything: a definition, a proof, a formula, ... is a term):
+
+<P>
+      E[x:t, P(x)] - &quot;there is a such x in the set t that
+P(x) is true&quot;;
+<P>
+      A[x:t, P(x)] - &quot;for all x in the set t P(x) is true&quot;;
+<P>
+      F[x:t, f(x)]   -  the typed lambda-notation.
+<P>
+This approach allowed to define the names E, A, F  and  many other
+similar &quot;quantifier&quot; names (see section 9). 
+<P>
+   A definition  d of constants c<SUB>1</SUB>, ... , c<SUB>k</SUB>
+of types t<SUB>1</SUB>, ... , t<SUB>k</SUB> has the following
+form:
+<P>
+               def[c<SUB>1</SUB>:t<SUB>1</SUB>, ... , c<SUB>k</SUB>:t<SUB>k</SUB>;
+a<SUB>1</SUB> | ... | a<SUB>m</SUB>];            (k &gt; 0, m
+ 0) 
+<P>
+Here a<SUB>1 , ... , </SUB>a<SUB>m</SUB> are the defining axioms
+(i.e some formulas) for the names c<SUB>1</SUB>, ... , c<SUB>k</SUB>.
+The notation M[d] (see 7.2) is used to denote the  set of all
+&quot;models&quot; of d (if d is considered as a theory with primary
+names c1, ..., ck and axioms a1, ..., am). M[d] is akin to record
+types in programming languages.
+<P>
+   A definition d of variables x<SUB>1</SUB>, ... , x<SUB>k</SUB>
+of types t<SUB>1</SUB>, ... , t<SUB>k</SUB> in the common case
+has the form:
+<P>
+            dv[x<SUB>1</SUB>:t<SUB>1</SUB>, ... , x<SUB>k</SUB>:t<SUB>k</SUB>;
+a<SUB>1</SUB> | ... | a<SUB>m</SUB>];          (k &gt; 0, m 0)
+<P>
+Here a<SUB>j</SUB> are the defining axioms (i.e some formulas)
+for the names x<SUB>1</SUB>, ... , x<SUB>k</SUB>. The short form
+ x:t (see above) actually denotes dv[x:t].  The notation &quot;M[d]&quot;
+may also be used if d is a definition of variables.
+<P>
+   There are some operations on definitions.  For instance the
+binary operation &quot;!&quot; for two definitions &quot;x:X &quot;
+and &quot;y:Y&quot; gives as result the definition dv[x:X, y:Y].
+ A different binary operation with the same name &quot;!&quot;
+for a definition &quot;x:X&quot;  and a formula Q(x) gives as
+result the definition dv[x:X; Q(x)] (i.e. the name &quot;!&quot;
+is overloaded - depending on context it may denote two different
+operations).
+<P>
+   Let us consider the following definitions (of group and linear
+order):
+<P>
+Group := def[elg:set,  : fn([elg, elg], elg), e: elg, inv:fn(elg,
+elg);  
+<P>
+            &lt; group axioms &gt; ];   
+<P>
+                (elg is the carrier set, &quot;w := q&quot; means
+&quot;the name w denotes the term q&quot;.)
+<P>
+Lod  := def[elod:set, &lt;= : fn([elod, elod], bool); &lt;linear
+order axioms&gt; ];            
+<P>
+           (elod is the carrier set). 
+<P>
+  Then a definition of linearly ordered group may have the following
+form:
+<P>
+    Log := Hext(Group,Lod,&quot;elog&quot;, A[a,b,x:elog, a&lt;=b
+ ax &lt;= bx &amp; xa &lt;= xb)]);
+<P>
+Here Hext is the operation of <I>hereditary extension</I> of two
+definitions. The result of this operation is another definition
+in which the carrier sets of the two definitions (elg and elod
+in this case) are &quot;merged&quot; into the carrier set of the
+new definition (elog in this case). So in this case the result
+is:
+<P>
+def[elog:set, : fn([elog,elog], elog), e: elog, inv: fn(elog,elog),
+&lt;= : fn([elog, elog], bool);
+<P>
+          &lt;group axioms&gt; &lt;linear order axioms&gt; 
+<P>
+          A[a,b,x:elog, a&lt;=b  ax &lt;= bx &amp; xa &lt;= x
+b) ]];
+<P>
+   Bertrand Meyer [Me88] emphasizes the similarity between multiple
+inheritance in object-oriented programming and this way of combining
+definitions in mathematics (actually he writes about combining
+theories but instead of a theory we can consider a definition
+of the theory). 
+<P>
+   Note that operations over definitions are handled by the translator
+(a relatively simple part of the system) before type checking
+(proof checking is really a part of type checking). So it is rather
+easy to introduce new operations over definitions.
+<P>
+   To emphasize the expressive possibilities of these notations
+let us show how for instance main language constructs of the Z
+specification language [Sp92] can be translated into the Veda
+language (note the latter is much simpler):<BR>
+
+<P>
+<pre>             Z                   Veda
+
+
+ [book; car]                       def[book: set, car: set];
+
+
+  W == Q                           W := Q;
+
+
+{x:X | P(x)}                       {x:X ! P(x)}
+
+
+{x:X; y:Y | P(x,y)}                M[x:X ! y:Y ! P(x,y)]
+
+
+
+ | m:Z
+ |----------                       m:int ! m > 0;
+ | m > 0
+ 
+
+ |=[X]===============              X:set; x:X;
+ |O : P X                          def[{} : P(X); ~(x in {}) ];
+ |-------------------
+ |O = {x:X | x ~= x}               (here O and {} denote  the empty set)
+ |_____________________
+ 
+
+ __S___________  
+ | a1:t1
+ | a2:t2                     S := def[a1:t1,a2:t2; P1(a1, a2) | P2(a1, a2) ];
+ |----------                                                 
+ | P1(a1, a2)
+ | P2(a1, a2)
+ |______________
+
+
+ __S1__________
+ | S
+ | a3:t3                    S1 := S ! def[a3:t3; P3(a1, a2, a3)];
+ |----------
+ | P3(a1, a2, a3)
+ |______________
+</pre>
+
+<a name="some"></a>
+<P>
+<B>3  Some auxiliary notions<BR>
+</B>
+<P>
+An <I>identifier</I> is a sequence of letters and digits beginning
+with a letter.
+<P>
+An <I>operator</I> is one- or two-character sequence of the following
+characters:
+<P>
+         +, -, *, /, =, &lt;, &gt;, &amp;, !, :, ~ 
+<P>
+An <I>integer</I> is a non-empty sequence of the digits 0,1,2,3,4,5,6,7,8,9.
+<P>
+An <I>infix name</I> is an operator or an identifier from the
+system table of infix names.  Currently this table is:
+<P>
+:=,
+<P>
+! ,!!,
+<P>
+: ,
+<P>
+==,
+<P>
+-&gt;,
+<P>
+or
+<P>
+&amp; ,
+<P>
+= ,~=
+<P>
+&lt;, &lt;=,&lt;:, &gt;, &gt;= , % ,in, nin, ::,
+<P>
+:&gt;,
+<P>
+..,
+<P>
++, - ,
+<P>
+*, /, \ ,^ ,
+<P>
+**, 
+<P>
+. 
+<P>
+    The line number where an infix name is located  defines the
+<I>priority</I> of the infix name (e.g., -&gt; (implication) has
+the priority 5).
+<P>
+   A <I>prefix name</I> is an operator from the system table of
+prefix names. Currently this table contains only two operators:
+- (minus) and ~ (negation).
+<P>
+    A <I>substitution S </I>is a finite set of pairs: S = { (x<SUB>1</SUB>,
+z<SUB>1</SUB>), ... , (x<SUB>k</SUB>, z<SUB>k</SUB>) },where x<SUB>i</SUB>
+is a variable, z<SUB>i</SUB> is a term, all x<SUB>i</SUB> are
+different and x<SUB>i</SUB> and z<SUB>i</SUB> are &quot;type compatible&quot;
+( i = 1, ... , k).
+<P>
+    If z is a term, S is a substitution, S = { (x<SUB>1</SUB>,
+z<SUB>1</SUB>), ... ,(x<SUB>k</SUB>, z<SUB>k</SUB>) }  then  <I>rep(z,
+S)</I>  denotes the result of simultaneous replacement of each
+occurrence of the variable x<SUB>i</SUB> in the term z on the
+term z<SUB>i </SUB> (i = 1, ... , k).
+<P>
+   If y, z are terms, x<SUB>1</SUB>, ... , x<SUB>k</SUB> are all
+variables in the term y, then <I>match(y, z)</I> denotes the substitution
+S such that z = rep(y, z)  if such a substitution S exists, otherwise
+match(y, z) denotes the empty set {}.
+<P>
+   If p is a formula then <I>istrue(p)</I> denotes &quot;true&quot;
+if the system can prove the formula p - maybe with  help  of the
+user, otherwise istrue(p) denotes &quot;false&quot;.<BR>
+
+<a name="modules"></a>
+<P>
+<B>4  Modules</B>
+<P>
+   
+<P>
+   Mathematical knowledge in the Veda system is kept as a set
+of <I>modules</I> (modules are similar to articles in the Mizar
+system [Ru92] and to theories in HOL [Go93]). There are two kinds
+of modules - definition modules and proof modules. 
+<P>
+  A <I>definition module</I> contains mostly definitions (though
+it may contain other terms including proofs) and has the following
+form:      
+<P>
+             definition module A;
+<P>
+             use A<SUB>1</SUB>, ..., A<SUB>m</SUB>;
+<P>
+             [d<SUB>1</SUB>;  ...   ,d<SUB>k</SUB>]          
+                  (m &gt; 0, k &gt;0)
+<P>
+where:  A - the name of the definition module - an identifier;
+A<SUB>1</SUB>, ..., A<SUB>m</SUB> - the names of other definition
+modules (these modules are called the external modules of the
+module A).
+<P>
+d<SUB>1</SUB>, ..., d<SUB>k</SUB> - some terms ( as a rule, definitions);
+these terms are called  the <I>root terms</I> of the module A.
+Only the names defined in the modules A, A<SUB>1</SUB>, ... ,
+A<SUB>m</SUB> may be used in the module A.
+<P>
+  There is a predefined definition module <I>snam</I> (<I>s</I>tandard
+<I>nam</I>es) containing definitions of the basic logical  - such
+as bool, &amp;, , ~, , ,  A, E; set-theoretical - such as , ,
+,, ,     (in, &lt;: , nin, +, * , {}  in Veda); arithmetical (such
+as integer, nat, +, -, ) and some other names. 
+<P>
+   A proof module has the following form:
+<P>
+               proof module B; 
+<P>
+               use A<SUB>1</SUB>, ... , A<SUB>m</SUB>;
+<P>
+               [ P<SUB>1</SUB>; ... ;P<SUB>k</SUB> ]         
+                  (m &gt; 0, k &gt;0)
+<P>
+where: B - the name of the proof module - an identifier. A<SUB>1</SUB>,
+... , A<SUB>m</SUB> - the names of some definition modules (these
+modules are called the external modules of the module A). P<SUB>1</SUB>,
+... , P<SUB>k</SUB> - some terms (as a rule, proofs). Only the
+names defined in the modules A, A<SUB>1</SUB>, ... , A<SUB>m</SUB>
+may be used in the module A.
+<P>
+    The main difference between definition and proof modules is
+that only names of definition modules may present in the USE list
+of a module; the system builds and keeps for each definition module
+its internal representation whereas for proof modules such representation
+is not kept in the system.<BR>
+
+<a name="scope"></a>
+<P>
+<B>5  Scope of names<BR>
+</B>
+<P>
+   Let A be a module whose external modules are A<SUB>1</SUB>,
+... , A<SUB>k</SUB>. An identifier or an operator f used in the
+module A must be defined in a definition d in one of the modules
+A, A<SUB>1</SUB>, ... , A<SUB>k</SUB>. Suppose the definition
+d is directly contained in a term b. The term b is called the
+block (of the definition d). The name f cannot be defined in another
+definition with the same block  except the case when the name
+f is defined as a functional name in both definitions (in this
+case the appropriate definition will be chosen using information
+about the number and the types of the actual parameters of f).
+<P>
+   The procedure for searching an appropriate definition for a
+given occurrence of the name f in the module A may be described
+as follows:
+<P>
+1) Choose the minimal block containing this occurrence of the
+name f and a definition of  the name f. If such a definition is
+unique in the block then OK, return this definition.
+<P>
+2) If there are two or more such definitions then use information
+about the number and the types of the actual parameters of f to
+choose the appropriate definition, return this definition.
+<P>
+3) If no appropriate definition is found in the module A continue
+the search among the root definitions in the module A<SUB>1</SUB>,
+then in the module A<SUB>2</SUB>, and  so on until the module
+A<SUB>k</SUB>.<BR>
+
+<a name="qualified"></a>
+<P>
+<B>6  Qualified names<BR>
+</B>
+<P>
+   Sometimes using the standard searching procedure for finding
+the appropriate definition of a name f may be impossible - for
+example if the name f is defined in the current module (and one
+of such definitions is visible from the given occurrence of f)
+but the appropriate definition of f actually is in an external
+module B. In this case the qualified name B.f must be used. In
+the common case a <I>qualified name</I> has the form M.x where
+M is the name of an external module and x is a name defined in
+a root definition of the module M.
+                    
+<a name="terms"></a>
+<P>
+<B>7   Terms<BR>
+</B>
+<P>
+  There are the following kinds of <I>terms</I> in the Veda language:
+constants, variables, synonyms (usually are used as abbreviations
+for big terms), def_con terms (definitions of constants), def_var
+terms (definitions of variables), denotational terms (introducing
+synonyms), functional terms, model terms, selector terms, common
+terms, sequence terms, element_of_sequence terms and type_converting_terms
+( proof terms and inference terms are described in the section
+8). 
+<P>
+  A term denoting a set is called a <I>set term</I>. Every term
+has a <I>type</I> - some set term. A term of the type bool is
+called a <I>formula</I>. 
+<P>
+     
+<P>
+ <B>7.1 Constants, variables and synonyms<BR>
+</B>
+<P>
+<B>  </B>A <I>constant</I> is an integer or a name defined in
+a definition of constants. A <I>variable</I> is a name defined
+in a definitions of variables. A <I>synonym</I> is a name defined
+in a denotational term (see below). Constants, variables and synonyms
+are called <I>simple terms</I>.
+<P>
+           
+<P>
+<B>7.2 Definitions of constants (def_con terms)<BR>
+</B>
+<P>
+   A <I>definition of constants </I>(a <I>def_con term</I>) has
+the following form:
+<P>
+             (1)    def[c<SUB>1</SUB>:t<SUB>1</SUB>, ... ,c<SUB>k</SUB>:t<SUB>k</SUB>;
+a<SUB>1</SUB>| ... |a<SUB>m</SUB>]
+<P>
+where k 1, m  0 (if m = 0 then &quot;;&quot; after t<SUB>k</SUB>
+must be omitted); c<SUB>1</SUB>, ... , c<SUB>k</SUB> - the names
+of constants (some identifiers or operators; also a name of a
+constant may have the form &quot;c[&quot;, where c is an identifier
+- such a name will be called a &quot;<I>bracket name</I>&quot;);
+t<SUB>1</SUB>, ... , t<SUB>k</SUB> - the types of the constants
+c<SUB>1</SUB>, ... , c<SUB>k</SUB> respectively (each type here
+is a closed set term); a<SUB>1</SUB>, ... , a<SUB>m</SUB> - the
+defining axioms (some formulae) for the names c<SUB>1</SUB>, ...
+, c<SUB>k </SUB>.The formulae c<SUB>1</SUB>  t<SUB>1</SUB>, ...
+, c<SUB>2</SUB>  t<SUB>2</SUB>  are considered as additional defining
+axioms.
+<P>
+   Let us now define the notion of a <I>consistent</I> definition
+of constants. If m = 0 then the definition (1) is called <I>consistent</I>
+iff the formula   t<SUB>1</SUB>  {} &amp; ... &amp; t<SUB>k</SUB>
+ {} is true (i.e. it can be proved by the system probably with
+the user's help). If m &gt; 0 then the definition (1) is called
+consistent iff the formula E[c<SUB>1</SUB>:t<SUB>1</SUB>! ...
+!c<SUB>k</SUB>:t<SUB>k</SUB>, a<SUB>1 </SUB>&amp; ... &amp; a<SUB>m</SUB>]
+is true (if some c<SUB>I</SUB> is not an identifier then it must
+be replaced with an identifier). A definition of constants which
+is not consistent is called <I>inconsistent</I>. The names defined
+in an inconsistent definition cannot be used outside of the definition
+<P>
+   If the previously introduced definitions were consistent then
+the given definition (1) is consistent iff a contradiction cannot
+be derived from the defining axioms of the definition (1). For
+instance, the definition of the Russel class R :
+<P>
+                           def[R:set; x  R  ~(x  x)]
+<P>
+is inconsistent because the result of substitution R instead of
+x in the defining axiom of R is the formula R  R  ~(R  R) which
+is false.
+<P>
+    A  <I>model</I>  of  the  definition (1) is a sequence of
+ closed terms z<SUB>1</SUB>, ... , z<SUB>k</SUB>  such  that 
+the formula  z<SUB>1</SUB>  t<SUB>1</SUB>' &amp; ... &amp; z<SUB>k</SUB>
+ t<SUB>k</SUB>' &amp; a<SUB>1</SUB>' &amp; ... &amp; a<SUB>k</SUB>'
+     is true  (t<SUB>i</SUB>' and a<SUB>j</SUB>' denote the result
+of replacement in terms t<SUB>i</SUB> and a<SUB>j</SUB> respectively
+the constants c<SUB>i</SUB> on the terms z<SUB>i</SUB>). 
+<P>
+   The class of all models of the definition d is denoted as <I>M[d]</I>
+ ( M[d] is akin to record types in programming languages). The
+type of a defintion of constants is <I>defs</I> (&quot;defs&quot;
+is a built-in name).<BR>
+
+<P>
+<B>7.3 Definitions of variables (def_var terms)<BR>
+</B>
+<P>
+ A <I>definition of variables  </I>(a <I>def_var term</I>) has
+the following form:
+<P>
+             (1)    dv[x<SUB>1</SUB>:t<SUB>1</SUB>, ... ,x<SUB>k</SUB>:t<SUB>k</SUB>;
+a<SUB>1</SUB>| ... |a<SUB>m</SUB>]
+<P>
+where k 1, m  0 (if m = 0 then &quot;;&quot; after t<SUB>k</SUB>
+must be omitted); x<SUB>1</SUB>, ... , x<SUB>k</SUB> - the names
+of constants (some identifiers); t<SUB>1</SUB>, ... , t<SUB>k</SUB>
+- the types of the constants c<SUB>1</SUB>, ... , c<SUB>k</SUB>
+respectively (each type here is a set term); a<SUB>1</SUB>, ...
+, a<SUB>m</SUB> - the defining axioms (some formulae) for the
+names x<SUB>1</SUB>, ... , x<SUB>k </SUB>.The formulae x<SUB>1</SUB>
+ t<SUB>1</SUB>, ... , x<SUB>2</SUB>  t<SUB>2</SUB>  are considered
+as additional defining axioms. The variables x<SUB>1</SUB>, ...
+, x<SUB>k</SUB>  in the all defining axioms are considered as
+constants - to forbid wrong applications of the Substitution Inference
+Rule. 
+<P>
+   For each definition of variables of the form (1) let us introduce
+the following definition of constants which is called the corresponding
+definition of constants to the given definition of variables:
+<P>
+              (2)     def[x<SUB>1</SUB>':t<SUB>1</SUB>', ... ,
+x<SUB>k</SUB>':t<SUB>k</SUB>'; a<SUB>1</SUB>'| ... | a<SUB>k</SUB>']
+<P>
+where the constant x<SUB>i</SUB>'(i = 1, ... , k) is called the
+corresponding constant to the variable x<SUB>i</SUB>; t<SUB>i</SUB>'
+(i = 1, ... ,k) is the result of replacement in the term t<SUB>i</SUB>
+all variables (not only x<SUB>1</SUB>, ... , x<SUB>k</SUB>) on
+the corresponding constants; a<SUB>j</SUB>' (j = 1, ... , m) is
+the result of replacement in the formulae a<SUB>j</SUB> the variables
+x<SUB>1</SUB>, ... , x<SUB>k</SUB> on their corresponding constants.
+<P>
+   The definition of variables (1) is called consistent iff the
+corresponding definition of constants (2) is consistent.
+<P>
+   The type of a definition of variables is <I>dvars </I>(&quot;dvars&quot;
+is a built-in name). <BR>
+
+<P>
+<B>7.4 Denotational terms<BR>
+</B>
+<P>
+A <I>denotational term</I> has the  form  x : = Z, where x is
+an identifier, Z is any term except simple and denotational terms.
+The name x is called a synonym (of the term Z) and can be used
+instead of the term Z. All synonyms must be different in any module.
+<P>
+   The type of (x := Z) is the type of the term Z.<BR>
+
+<P>
+<B>7.5 Functional terms<BR>
+</B>
+<P>
+<I>   </I>Functional terms denote some sets of functions. A <I>functional
+term</I> may be a simple functional term, a multiple functional
+term or a dependent functional term. 
+<P>
+  A <I>simple functional term</I> has the form fn(A, B) where
+A, B are some set terms and denotes the set of all functions from
+the set A to the set B. 
+<P>
+   A <I>multiple functional term </I>has the form fn([A<SUB>1</SUB>,
+... , A<SUB>k</SUB>], B) where k 1, A<SUB>1</SUB>, ... , A<SUB>k</SUB>,
+B are some set terms and denotes the set of all functions from
+the Cartesian product of the sets A<SUB>1</SUB>, ... , A<SUB>k</SUB>
+to the set B.
+<P>
+  A <I>dependent functional term</I> has the form fn(d, A) where
+d is a definition of variables, A is a set term and denotes the
+set of all functions from  the set M[d] (see 7.2) to the set B.
+<P>
+  The type of a functional term is set (&quot;set&quot; is a built-in
+name).<BR>
+
+<P>
+<B>7.6 Model terms<BR>
+</B>
+<P>
+   A  <I>model  term  z </I> has  the  form  d(z<SUB>1</SUB>,
+... , z<SUB>k</SUB>)  where  d is a definition and  the sequence
+<P>
+(z<SUB>1</SUB>, ... , z<SUB>k</SUB>) is a model of the definition
+d. The type of the term z is M[d] (see 7.2)..<BR>
+
+<P>
+<B>7.7 Selector terms<BR>
+</B>
+<P>
+   A <I>selector term</I>  has the form z.x where z is a term
+of type M[d] for some definition d, x is a name defined in d.
+If z = d(z<SUB>1</SUB>, ... , z<SUB>k</SUB>), the name x has the
+number j in the definition d then  z.x = z<SUB>j</SUB>. The type
+of the term z.x is the type of the term z<SUB>j</SUB>.<BR>
+
+<P>
+<B>7.8 Common terms<BR>
+</B>
+<P>
+   Before describing common terms it is convenient to define a
+function <I>fit(x, y) </I>where x is any term, y is a set term
+and the result of this function is a pair &lt;p, s&gt; where p
+is a boolean value and s is a substitution,  as follows:  
+<P>
+ if the term y contains no free variables then    p = istrue(x
+in y), s = {}
+<P>
+ otherwise (i.e. y contains free variables)  s = match(y, type(x)),
+p = (s ~= {}).
+<P>
+    A <I>common term</I> z has the form f(z<SUB>1</SUB>, ... ,
+z<SUB>k</SUB>) or f[z<SUB>1</SUB>, ... , z<SUB>k</SUB>] (in this
+case &quot;f[&quot; must be defined as a &quot;bracket name&quot;
+- see 7.2) where k &gt;= 1, f is a term of the type fn(A, B),
+z<SUB>1</SUB>, ... , z<SUB>k</SUB> - some other terms. The following
+three cases are possible:
+<P>
+1) A is a set (in this case k=1). Let (p, s) = fit(z, A). The
+value of p must be true. The type of z is rep(B, s).
+<P>
+2) A has the form [A<SUB>1</SUB>, ... , A<SUB>n</SUB>]. Let us
+define the sequence p<SUB>0</SUB>, ..., p<SUB>n</SUB> of  boolean
+values and the sequence S<SUB>0</SUB>, ... , S<SUB>n</SUB> of
+substitutions in the following way:
+<P>
+       p<SUB>0</SUB> = &quot;true&quot;, S<SUB>0</SUB> = {};
+<P>
+       let (p,s) = fit(z<SUB>i</SUB>, rep(A<SUB>i</SUB>, S<SUB>i-1</SUB>))
+,  then p<SUB>i</SUB> = p, S<SUB>i</SUB> = S<SUB>i-1</SUB>  {s}
+   (i = 1, ... , n).
+<P>
+The values of all p<SUB>i</SUB> (i=1, ..., n) must be &quot;true&quot;.
+  The type of z is rep(B, S<SUB>n</SUB>).
+<P>
+3) A has the form x<SUB>1</SUB>:t<SUB>1 </SUB>! ... ! x<SUB>n</SUB>:t<SUB>n
+</SUB>! Q. As in the previous case let us define the sequence
+(p<SUB>0</SUB>, ... , p<SUB>n</SUB>) of boolean values and the
+sequence of substitutions S<SUB>0</SUB>, ... , S<SUB>n</SUB> as
+follows:
+<P>
+       p<SUB>0</SUB> = &quot;true&quot;, S<SUB>0</SUB> ={};
+<P>
+       let (p,s) = fit(z<SUB>i</SUB>, rep(A<SUB>i</SUB>, S<SUB>i-1</SUB>))
+,  then p<SUB>i</SUB> = p, S<SUB>i</SUB> = S<SUB>i-1</SUB>  s
+ {(x<SUB>i</SUB>, z<SUB>i</SUB>)}.   (i = 1, ..., n)
+<P>
+The values of all p<SUB>i</SUB>  (i=1, ..., n) must be &quot;true&quot;.
+The formula rep(Q, S<SUB>n</SUB>) must be true.
+<P>
+The type of z is rep(B,S).<BR>
+
+<P>
+<B>7.9  Infix terms<BR>
+</B>
+<P>
+<I>   Infix terms</I> are a syntactic variation of common terms.
+An infix term has the form z1 op z2 where z1, z2 are some terms,
+op is an infix name (see 3). The infix term z1 op z1 may be considered
+as the common term op(z1, z2).<BR>
+
+<P>
+ <B>7.10 Sequence terms<BR>
+</B>
+<P>
+   A <I>sequence term </I>z has the form [z<SUB>1</SUB>, ...,
+z<SUB>k</SUB>] (k &gt;0)   and denotes the sequence (z<SUB>1</SUB>,
+... ,z<SUB>k</SUB>). If for all i = 1, ... , k the formula &quot;z<SUB>i</SUB>
+in type(z<SUB>1</SUB>)&quot; is true then the type of the term
+z is seq(type(z<SUB>1</SUB>)), otherwise the type of z is seq(any)
+(&quot;any&quot; is a built-in name).<BR>
+
+<P>
+<B>7.11 Element_of_sequence terms<BR>
+</B>
+<P>
+   An <I>element_of_sequence term </I>has the form z(i) where
+z is a term of the type seq(t) for some set term t, i is such
+a term that the formula &quot;i in 1..l(z) &quot;is true. The
+type of the term z(i) is t.<BR>
+
+<P>
+<B>7.12 Type_converting terms</B>
+<P>
+  
+<P>
+   A <I>type_converting term</I> has the form t(z) where t is
+a set term, z is such a term that the formula &quot;z in t&quot;
+is true. The type of the term t(z) is t.<BR>
+
+<a name="writing"></a>
+<P>
+ <B>8  Writing proofs</B>             
+<P>
+              
+<P>
+   In mathematical logic proof usually is defined as a finite
+sequence  of one or more formulas if each formula either is an
+axiom or is immediately inferred from preceding formulas in the
+sequence by means of one of the inference rules. In the system
+Veda a slightly more common definition of proof is used - the
+restriction &quot;inferred from preceding formulas&quot; is omitted;
+it makes possible to write not only &quot;bottom-up&quot; proofs
+(corresponding to the classical definition of proof), but also
+&quot;top-down&quot; proofs, maybe more frequently occurring in
+mathematics (see below).<BR>
+
+<P>
+  <B>8.1  Inference terms</B>              
+<P>
+  
+<P>
+   An <I>inference term</I> z has the  form    R(F<SUB>1</SUB>,
+..., F<SUB>k</SUB>)   (k &gt; 0) where R is a name (an identifier)
+of an inference rule, F<SUB>1</SUB> is a formula, called the output
+formula of the inference term z,  F<SUB>2</SUB>, ..., F<SUB>k</SUB>
+ - some terms (usually formulas). For each inference term z of
+the form R(F<SUB>1</SUB>, ... ,F<SUB>k</SUB>) there are defined
+input formulas of the inference term z - a subset of the set {F<SUB>2</SUB>,
+... ,F<SUB>k</SUB>}. Let us say that the output formula F<SUB>1</SUB>
+depends on each input formula in the inference term z (it is allowed
+instead of an input formula to put a name - the name in this context
+denotes the first defining axiom for this name).
+<P>
+   The most important inference rules are  &quot;logic&quot; and
+&quot;simplify&quot; . The corresponding inference terms have
+the following forms:
+<P>
+   logic(F<SUB>1</SUB>, F<SUB>2</SUB>, ... , F<SUB>k</SUB>) -
+&quot;the formula F<SUB>1</SUB> logically follows from the formulas
+ F<SUB>2</SUB>, ... , F<SUB>k</SUB>&quot; (here the input formulas
+are F<SUB>2</SUB>, ... , F<SUB>k</SUB>);
+<P>
+    simplify(F<SUB>1</SUB>, &lt;possible parameters&gt;) - &quot;the
+result of simplification of the formula F1 using the standard
+simplification procedure of the system must be &quot;true&quot;
+(here the set of input formulas is empty).
+<P>
+   An induction inference rule is described below.<BR>
+
+<P>
+<B>8.2  An induction inference rule<BR>
+</B>
+<P>
+   Let A be a nonempty set, R - a binary relation on A , R<SUP>*</SUP>-
+the reflexive transitive  closure of R and a - an element of A.
+ Let us denote the set   { x:A | R<SUP>*</SUP>(a, x) }  as  ind(A,
+R, a).It is easy to show that  a formula of the form
+<P>
+(0)      A[x<SUB>1</SUB>:ind(A, R, a) ! x<SUB>2</SUB>:t<SUB>2</SUB>
+! ... ! x<SUB>k</SUB>:t<SUB>k</SUB>, P(x<SUB>1</SUB>,x<SUB>2</SUB>,
+... , x<SUB>k</SUB>)]   (k   0)
+<P>
+may be proved by induction - to prove the formula it is sufficiently
+to prove the following two formulas:
+<P>
+(1) A[x<SUB>2</SUB>:t<SUB>2</SUB>! ... !x<SUB>k</SUB>!t<SUB>k</SUB>,
+P(a, x<SUB>2</SUB>, ... , x<SUB>k</SUB>)]  (or just P(a) if k=1)
+-  the basis of induction  and
+<P>
+(2) A[x<SUB>1</SUB>:ind(A, R, a) ! x<SUB>2</SUB>:t<SUB>2 </SUB>!
+... ! x<SUB>k</SUB>:t<SUB>k </SUB>! y:A,       
+<P>
+           P(x<SUB>1</SUB>, x<SUB>2</SUB>, ... ,x<SUB>k</SUB>)
+&amp; R(x<SUB>1</SUB>, y)  P(y, x<SUB>2</SUB>, ... , x<SUB>k</SUB>)
+]  - the step  of induction;  
+<P>
+(actually the induction variable x<SUB>1</SUB> may have any number
+1,2, ... , k).                                               
+                 
+<P>
+  To prove the formula (2) we may suppose that for some x<SUB>
+1 ind(A, R, a), x2</SUB>  t<SUB>2</SUB>, ... , x<SUB>ktk</SUB>
+ the formulas P(x<SUB>1</SUB>, ... x<SUB>k</SUB>) and R(x<SUB>1</SUB>,
+y) are true and then prove P(y, x<SUB>2</SUB>, ... , x<SUB>k</SUB>).
+So there is the following inference rule  <I>relind</I>(F, B,
+D, S, I) where F must have the form of the formula (0), B must
+have the form of the formula (1), i is the number of an induction
+variable (below i = 1), D is a definition of the form
+<P>
+       def[x<SUB>1</SUB>:ind(A, R, a), x<SUB>2</SUB>:t<SUB>2</SUB>,
+... , x<SUB>k</SUB>:t<SUB>k</SUB>, y:A; P(x<SUB>1</SUB>, ... x<SUB>k</SUB>)
+| R(x<SUB>1</SUB>, y]   
+<P>
+and S must have the form of P(y, x<SUB>2</SUB>, ... , x<SUB>k</SUB>).
+B and S are the input formulas here.<BR>
+
+<P>
+<B>8.3  Direct proof terms<BR>
+</B>
+<P>
+     A <I>direct proof term</I> z has the  form     proof([F<SUB>0</SUB>;
+F<SUB>1</SUB>; ... ;F<SUB>k</SUB>]);      (k &gt; 0)     where
+F<SUB>0</SUB> is the formula to be proved, F<SUB>1</SUB>, ...
+, F<SUB>k</SUB> - some terms (usually formulas and inference terms).
+The inference terms in the proof z define a binary relation Dep
+on the set of all formulas occurring in z in an obvious way: 
+<P>
+     Dep(F<SUB>i</SUB>, F<SUB>j</SUB>) = true iff F<SUB>i </SUB>depends
+on F<SUB>j</SUB> in some inference term in z (i,j =1, ... ,k).
+<P>
+Let G be the graph corresponding to the relation Dep. The following
+conditions must be satisfied:
+<P>
+1) The graph G must be a dag (i.e. directed acyclic graph); 
+<P>
+2) The formula F0 is an input vertex of the graph G;
+<P>
+3) The formulas corresponding to the output vertexes of G must
+be true.<BR>
+
+<P>
+<B>8.4  Contrary proof terms</B>
+<P>
+      
+<P>
+   A contrary proof term z corresponds to a proof by &quot;reductio
+ad absurdum&quot; and has the  form:       proofr([F<SUB>0</SUB>;
+F<SUB>1</SUB>; ... ; F<SUB>k</SUB>; contradiction(H<SUB>1</SUB>,
+... ,H<SUB>m</SUB>)]);         (k &gt; 1, m &gt; 1), where F<SUB>0</SUB>,
+F<SUB>1</SUB>, ... , F<SUB>k</SUB> have the same sense as for
+direct proof terms, H<SUB>1</SUB>, ... ,H<SUB>m</SUB>  are some
+formulas from the set {F<SUB>1</SUB>, ... ,F<SUB>k</SUB>}. 
+<P>
+   Handling the contrary proof term z the system automatically
+builds the negation of the formula F<SUB>0</SUB> and temporarily
+marks it as true. The inference terms in the contrary proof z
+define a graph G in a similar way as for direct proof terms (
+only the conditions 1 and 3 must be satisfied ). The formulas
+H<SUB>1</SUB>, ... ,H<SUB>m</SUB> must be mutually contradictory.
+ 
+<a name="definitions"></a>
+<P>
+<B>9       Definitions of some standard (i.e. defined in the module
+SNAM) names <BR>
+</B>
+<P>
+   The main purpose of this section is to define the quantifier
+names A and E  (and also some other names). We  follow  the approach
+of [Hi70] and at first the Hilbert's epsilon-symbol will be defined.
+ Below <I>rep(p, d, z)<B> </B></I>(where z is a model  of the
+definition d) <I><B> </B></I>denotes the result of replacement
+in the term p all variables defined in d on the corresponding
+constituents of z and <I>type(f) </I>denotes the type of the term
+f. The names rep and type are built-in and are handled by the
+system in a special way. <BR>
+
+<P>
+def[dvars: set];    -- dvars is the set of all definitons of variables
+<P>
+p:bool; d:dvars; z:M[d]; f: any;   -- auxiliary variables 
+<P>
+def[eps[ : fn(d:dvars!p:bool, M[d]);  rep(p, d, z)   rep(p, d,
+eps[d, p])];
+<P>
+def[A[ : fn([dvars, bool], bool); A[d, p]  rep(p, d, eps[d, ~p])];
+<P>
+def[E[ : fn([dvars, bool], bool); E[d, p]  rep(p, d, eps[d, p])];
+<P>
+def[F[ : fn(d:dvars!f:any, fn(M[d], type(f))); F[d, f](z) = rep(f,
+d, z) ].
+
+<a name="examples"></a>
+<P>
+<B>10     Some examples of using the Veda system<P>
+</B>
+<a href="#prim">10.1 The set of all prime numbers is infinite<br></a>
+<a href="#square">10.2 The sum of squares<br></a>
+<a href="#mboard">10.3 The mutilated checkboard problem<br></a> 
+<a href="#cfg">10.4 A theorem from the theory of context-free grammars<br></a>
+<hr>
+<a name="prim"></a><p><b>
+10.1 The set of all prime numbers is infinite </b><p>
+<P><pre>
+--     The set of all prime numbers is infinite   04/14/96
+
+   proof module  prim;   -- time = 8 sec.
+
+   use  snam ;
+[
+ x:int! y:int! z:int ;
+ def[fact: fn(int,int); fact(x) + 1 > x |
+			y \ (fact(x) + 1) -> y > x]d;
+ def[prim: fn(int,bool);
+     ~(prim(x)) -> E[z:int, z \ x & z>1 & z<x & prim(z)]]d;
+ def[\ : fn([int,int],bool)]d;
+
+ 	    proofr([   -- proof by reductio ad absurdum
+
+  A[x:int, E[y:int, prim(x) -> y>x & prim(y)]];  -- the theorem
+
+-- !E[x:int, A[y:int, prim(x) &(~ y>x or ~ prim(y))]]; -- the negation
+-- the system builds the negation automaticlly and marks it as true
+
+ s2 := def[c: int; A[y:int, prim(c) & (~( y>c) or ~(prim(y)))]]d;
+ 
+ F  := fact(c) + 1;                     
+
+ s3 :=  F > c;      logic(s3,fact);    -- from def: fact(x) + 1 > x
+
+ s4 := ~(prim(F));  logic(s4,s3,c);    -- from  s2, s3
+
+ s5 := E[z:int, z \ F & z>1 & z<F & prim(z)]; logic(s5,s4,prim); -- from s4 and
+
+ s6 :=  def[z: int; z \ F & z>1 & z<F & prim(z)]d;
+
+ s7 := z > c;       logic(s7, z, fact);    -- from z \ F in def z
+		        -- and  y \ (fact(x) + 1) -> y > x in def fact
+ s8 := prim(z);     logic(s8, z);  -- from def z
+
+ s9 := ~(z > c);    logic(s9, s8, c); -- from s2, s8
+
+      contradiction(s7, s9)
+
+     ]) -- end proof
+]
+</pre>
+<hr>
+<p>
+<a name="square"><b>10.2 The sum of squares</b><p></a>
+<pre>
+--  0^2 + 1^2 + 2^2 + ... + n^2 = n*(n+1)*(2*n+1)/6;
+
+    proof module sumsq;     -- time  = 7 sec
+    use snam ;
+
+  [ n:int;   -- n is a variable of type int
+  def[S: fn(int,int); -- S is a functional constant of type int->int
+                      S(0) = 0 |                   -- the defining axioms  
+                      S(n+1) = S(n) + (n+1)*(n+1)  --  for S
+     ]d; -- end of definition of S
+
+  def[Q: fn(int,int); -- Q is a functional constant of type  nat->nat
+         Q(n) = n*(n+1)*(2*n+1)/6 -- the defining axiom for Q
+     ]d; -- end of definition of Q
+
+proof([  F := A[k:nat, S(k) = Q(k)];
+
+  induction(F, basis, D:=def[c: nat; S(c) = Q(c)]d, step);
+
+ basis := S(0) = Q(0);              simplify(basis);
+
+ c    := D.c;    -- it is necessary because c is a local constant
+
+ step := S(c+1) = Q(c+1);           expand(step, S(c+1), F1);
+
+ F1 := S(c) + (c+1)*(c+1) = Q(c+1); apply(F1, S(c) = Q(c), F2);
+
+ F2 := Q(c) + (c+1)*(c+1) = Q(c+1); expand(F2,Q(c),Q(c+1),F3);
+
+ F3 :=     c*(c+1)*(2*c+1)/6 + (c+1)*(c+1) =
+      (c+1)*(c+1+1)*(2*(c+1)+1)/6;  simplify(F3)
+
+    ]) -- end of proof
+   ] -- end of sumsq
+
+
+  -- "induction" is the name of an induction inference rule:
+  --  To prove F (it must be of the form A[i:nat, P(i)] ) it is sufficient
+  -- to prove the formulae  P(0) (basis) and P(c+1) (step) where the definition 
+  -- of c must be of the form: def[c; nat; P(c)]
+
+  -- "simplify" is the name of the simplification inference  rule;
+  -- in this case it means that the result of application of the standard 
+  -- system simplification procedure to the formula basis (that is,S(0)=Q(0)) 
+  -- must be the constant "true"
+
+ -- "expand" is the name of the "expand" inference rule;
+ -- in this case it means that in the formula step the result of replacement 
+ -- the term "S(c+1)" according to definition of S must yield the formula F1
+
+ -- "apply" is the name of the "apply" inference rule;
+ -- in this case it means that replacement in F1 the term S(c) on Q(c)
+ -- must yield the formula F2
+</pre>
+<hr>
+<a name="mboard"><b>10.3 The mutilated checkboard problem</b><p></a>
+<pre>
+   Below is a proof of the mutilated checkboard problem in the
+system Veda. This proof consists of one definitional module mchbdef
+containing necessary definitions and five proof modules (the main
+theorem and four lemmas):
+
+------------------------------------------------------------- file mchbdef.v
+-- Mutilated checkboard: definitons;     
+-- this file (its name is mchbdef.v) is translated sepatately 
+
+definition module mchbdef;   -- "definition module" means that
+--  the system would create the new file mchbdef.ved - an inner
+--  (tree-like) representation of the file mchbdef.v . 
+
+use snam ; -- the definitional module snam (definitions of the
+--            Standard(i.e predefined: set,int,+,-, bool, &, ...)
+--            NAMes) is used.
+
+     [
+board  := 0..63;   -- checkboard
+mboard := 1..62;   -- mutilated checkboard
+Pb := P(board);    -- P(A) means "the set of all subsets of A"
+S: Pb;             -- S is a subset of 0..63
+x: board;          -- x is a square of the board  
+y: board;          -- y is a square of the board 
+z: P(Pb);          -- z is a set of sets of squares
+x1: z;
+
+def[color; fn(int, bool);   --  false = white, true = black
+ axcolor :=  color(x) = (even(row(x)) == even(col(x))) ]d;
+def[row; fn(int, int); row(x) = x / 8]d;   -- row(x) = div(x,8)
+def[col; fn(int, int); col(x) = x % 8]d;   -- col(x) = res(x,8)
+wp := F[x:int, color(x) = false];
+bp := F[x:int, color(x) = true];
+def[whites; fn(Pb, Pb); whites(S) = Set(S, wp) ]d;
+def[blacks; fn(Pb, Pb); blacks(S) = Set(S, bp) ]d;
+def[adj; fn([int, int], bool);     -- adjacent squares
+     adj(x, y) ==  row(x) = row(y) & abs(x-y) = 1 or
+		   col(x) = col(y) & abs(x-y) = 8 ]d;
+def[partial_covering; fn(P(Pb), bool);
+       partial_covering(z) == domino(any1(z)) & dsj(z) -- dsj:
+       ]d; --  any1(z) is a variable of type z;        -- disjoint
+def[domino; fn(Pb, bool);
+    domino(S) == N(S) = 2 &
+		 A[x:S!y:S, x ~= y -> adj(x, y)]]d;
+lemma1 := A[x:board!y:board, row(x) = row(y) & abs(x-y) = 1 ->
+                             ~(color(x) = color(y)) ];     
+lemma2 := A[x:board!y:board, col(x) = col(y) & abs(x-y) = 8 ->
+                             ~(color(x) = color(y)) ];     
+lemma3 := A[x:board!y:board, adj(x,y) -> ~(color(x) = color(y))];
+
+lemma4 := A[s:P(board)!p:bool,
+	      domino(s) -> N(set[x:s, color(x) = p]) = 1]
+	] -- end mchbdef
+-- time: 6 sec. (on a 486SX25)
+--------------------------------------------------------end of file mchbdef.v
+--------------------------------------------------------------file mchbmain.v
+-- proof by reductio to absurdum of the main theorem;  
+-- it will be checked separately;
+
+   proof module  mchbmain;  -- here, "proof" means that the
+--                      system would not build the file mchbmain.ved
+
+   use mchbdef , snam ;
+
+   [
+
+   A:set! S1:set! f1:fn(A, bool)! S1<:A;
+   def[ax2; any; Set(S1, f1) = set[x:S1, f1(x)] ]d;
+   def[ax; any; (false == true) = false]d;
+   proofr([
+
+   ~(E[z:P(P(board)), partial_covering(z) & U(z) = mboard]);
+
+    def[z; P(P(board)); partial_covering(z) & U(z) = mboard]d;
+
+--lemma4 := A[s:P(board)!p:bool,
+--           domino(s) -> N(set[x:s, color(x) = p]) = 1];
+
+    suppose(lemma4);
+
+F1:= N(whites(U(z))) = N(blacks(U z));
+	  simplify(F1,3,U(z)); -- the mode 3 means that the system
+	  -- may not reduce the term U(z) (to prevent wrong reduction
+	  -- U(z) => mboard);
+   -- proving F1 the system found and used the following reductions:
+   -- whites(U(z))  => Set(U(z), wp); -- wp := F[x:int, color(x) = false];
+   -- Set(U(z), wp) => U[s:z, Set(s, wp)];
+   -- N(U[s:z, Set(s, wp)]) => if2(dsj(z), SUM[s:z, N(set[x:s, wp(x)])]);
+   -- dsj(z) => true;        
+   -- wp(x) => color(x) = false;
+   -- if2(true, SUM[s:z, N(set[x:s, color(x) = false])]) =>
+   --                           SUM[s:z, N(set[x:s, color(x) = false])];
+   -- N(set[x:s, color(x) = false]) => if2(domino(s), 1);
+   -- domino(s) => true;
+   -- if2(true, 1) => 1;
+   -- SUM[s:z, 1) => N(z);
+   -- That is, the system reduced N(whites(U(z)) to N(z);
+   -- In the same way the system reduced N(blacks(U z)) also to N(z);
+   -- So F1 was reduced to N(z) = N(z) and then to true;
+
+F2:= ~(N(whites(mboard)) = N(blacks(mboard))); simplify(F2);
+   -- proving F2 the system found and used the following reductions:
+   -- whites(mboard) => Set(1..62, wp) =>
+   --     set[x:1..62, color(x) = false];
+   -- N(set[x:1..62, color(x) = false]) =>
+   --     SUM[x:1..62, color(x) = false] => 32;
+   -- In the same way N(blacks(mboard)) was reduced to 30;
+   -- ~(32 = 30) => true;
+
+F3:= N(whites(mboard)) = N(blacks(mboard)); subst(F3,U(z),F1)
+
+    ]) -- here the system discovers a contradiction :
+
+   ] -- end mchbmain
+-- time : 57 sec. 
+------------------------------------------------------------end file mchbmain.v
+------------------------------------------------------------------file mchbl1.v
+   proof module  mchbl1;
+
+   use mchbdef , snam ;
+
+--lemma1 := A[x:board!y:board,
+--  row(x) = row(y) & abs(x-y) = 1 -> ~(color(x) = color(y)) ];
+
+[
+
+ def[ax; any;
+  ax12 := A[p:bool!q:bool!r:bool, (p==q) = (p==r) -> q=r] |
+  ax13 := A[x:int!z:int,
+      even(z) -> even(x%z) = even(x)] |
+  ax14 := A[x1:int!y1:int, abs(x1-y1) = 1 -> ~(even(x1) = even(y1))]]d;
+
+proofr([ lemma1;
+
+def[x,y; board,board;
+    row(x) = row(y) & abs(x-y) = 1 & color(x) = color(y) ]d;
+
+F1 := (even(row(x)) == even(col(x))) =
+      (even(row(y)) == even(col(y))) ;
+
+       rewrite(F1, [axcolor], color(x) = color(y));
+
+F2 := (even(row(y)) == even(col(x))) =
+      (even(row(y)) == even(col(y))) ; subst(F2, row(x), F1);
+
+F3 := even(col(x)) = even(col(y));  MP(F3, ax12, F2);
+
+F4 := even(x%8) = even(y%8); subst(F4, col(x), col(y), F3);
+
+F5 := even(x) = even(y);
+  reduce(F5, even(x%8) = even(x),even(y%8) = even(y), F4);
+
+F6 := ~(even(x) = even(y));  MP(F6, ax14, abs(x-y) = 1)
+
+  ]) -- end proof
+] -- end mchbl1
+-- time: 7 sec. 
+------------------------------------------------------------end of file mchbl1.v
+-------------------------------------------------------------------file mchbl2.v
+   proof module  mchbl2;
+
+   use mchbdef , snam ;
+
+--lemma2 := A[x:board!y:board,
+--  col(x) = col(y) & abs(x-y) = 8 -> ~(color(x) = color(y)) ];
+
+[
+
+ def[ax; any;
+  ax12a := A[p:bool!q:bool!r:bool, (q==p) = (r==p) -> q=r] |
+  ax13 := A[x:int!z:int,
+      even(z) -> even(x%z) = even(x)] |
+  ax14a := A[x1:int!y1:int, abs(x1-y1) = 8 -> ~(even(x1/8) = even(y1/8))]]d;
+
+proofr([ lemma2;
+
+def[x,y; board,board;
+    col(x) = col(y) & abs(x-y) = 8 & color(x) = color(y) ]d;
+
+F1 := (even(row(x)) == even(col(x))) =
+      (even(row(y)) == even(col(y))) ;
+
+       rewrite(F1, [axcolor], color(x) = color(y));
+
+F2 := (even(row(x)) == even(col(y))) =
+      (even(row(y)) == even(col(y))) ; subst(F2, col(x), F1);
+
+F3 := even(row(x)) = even(row(y));  MP(F3, ax12a, F2);
+
+F4 := even(x/8) = even(y/8); subst(F4, row(x), row(y), F3);
+
+
+F6 := ~(even(x/8) = even(y/8));  MP(F6, ax14a, abs(x-y) = 8)
+
+  ]) -- end proof
+] -- end mchbl2
+-- time: 6 sec.
+------------------------------------------------------------end of file mchbl2.v
+-------------------------------------------------------------------file mchbl3.v
+   proof module  mchbl3;
+
+   use mchbdef , snam ;
+
+--lemma3 := A[x:board!y:board,
+--        adj(x,y) -> ~(color(x) = color(y)) ];
+
+[
+
+  proofr([ lemma3;
+
+def[x,y; board,board; adj(x,y) & color(x) = color(y) ]d;
+
+--     adj(x, y) ==  row(x) = row(y) & abs(x-y) = 1 or
+--		   col(x) = col(y) & abs(x-y) = 8 ]d;
+
+F1 := row(x) = row(y) & abs(x-y) = 1 or
+
+      col(x) = col(y) & abs(x-y) = 8;
+
+                     rewrite(F1, [adj], adj(x,y));
+
+      suppose(lemma1);  suppose(lemma2);
+
+F2 := ~(color(x) = color(y)); logic(F2, F1, lemma1, lemma2)
+
+  ]) -- end proof
+] -- end mchbl3
+-- time: 27 sec.
+------------------------------------------------------------end of file mchbl3.v
+-------------------------------------------------------------------file mchbl4.v
+   proof module  mchbl4;
+
+   use mchbdef , snam ;
+
+--lemma4 := A[s:P(board)!p:bool,
+--	      domino(s) -> N(set[x:s, color(x) = p]) = 1]
+
+[
+ def[axbool; any; N(bool) = 2]d;
+ f:fn(A,B); A1:set!A1<:set; B1:set; A:set!B:set;  a:any!b:any;
+ def[difval; fn(f:fn(A, B)!A1:set!A1<:A, bool);
+   difval(f, A1) == A[x:A1!y:A1, x ~= y -> f(x) ~= f(y)]]d;
+ def[im; fn(f:fn(A, B)!A1:set!B1:set!A1<:A, bool);
+   im(f, A1, B1) == A[x:A1, f(x) in B1 ] |
+   axim2 := im(f, A1, B) ]d;
+ def[biection; fn(f:fn(A,B)!A1:set!B1:set!A1<:A, bool);
+ T28 := difval(f, A1) & im(f, A1, B1) & N(A1) = N(B1) ->
+          biection(f,A1,B1) |
+ T31 := biection(f,A1,B1) -> N(set[x:A1, f(x) = any1(B1)]) = 1]d;
+
+  proofr([ lemma4;
+
+def[s,p; P(board), bool;
+          domino(s) & ~(N(set[x:s, color(x) = p]) = 1)]d;
+
+F1 := N(s)=2 & (F11 := A[x:s!y:s, x ~= y -> adj(x, y)]);
+            MP(F1, domino, domino(s));
+
+      suppose(lemma3);
+
+F2 := A[x:s!y:s, x ~= y -> color(x) ~= color(y)];
+		     logic(F2, F11, lemma3);
+
+F3 := N(s) = N(bool); simplify(F3);
+
+F4 := difval(color, s);  MP(F4, difval, F2);
+
+F5 := im(color, s, bool); simplify(F5);
+
+F6 := biection(color, s, bool); logic(F6,T28, F3, F4, F5);
+
+F7 := N(set[x:s, color(x) = any1(bool)]) = 1; MP(F7, T31, F6)
+
+    ]) -- end proofr
+  ] -- end mchbl4
+-- time: 12 sec.
+---------------------------------------end of file mchbl4.v
+</pre>
+<hr>
+<a name="cfg"><b>10.4 A theorem from the theory of context-free grammars</b><br></a>
+<P>
+   When developing an LR(1)-parser [Ah72] it is necessary to use
+an algorithm to compute for any nonterminal A (in a context-free
+grammar G) the set of first symbols of the (left) sententional
+forms derived from A - we denote here this set as F(A).
+<P>
+Let G = (V, VT, VN, RS, S) - a context-free grammar, where:
+<P>
+  V  - a nonempty finite set  - the set of symbols of G;
+<P>
+  VT - a nonempty subset of V - the set of terminals of G;
+<P>
+  VN - a nonempty subset of V - the set of terminals of G;
+<P>
+        ( V = VT + VN, VT  VT = {} )
+<P>
+  RS - a nonempty finite set - the set of grammar rules(or simply
+rules) of G, each rule is a 
+<P>
+           pair (A, x), where A is a nonterminal, x is a finite
+sequence of symbols from V;
+<P>
+  S  - a nonterminal - the initial symbol of G.
+<P>
+The letter z (possibly with indexes) will be used for denoting
+of symbols (i.e. elements of the set V); the letters x, y (possibly
+with indexes) will be used for denoting of finite sequences of
+symbols (from the set V). Let us introduce the following notations:
+
+<P>
+R(z, x) - there is a rule of the form (z, x) in G;
+<P>
+ld(x, y) - y is immediately left derivable from x,  
+<P>
+                 i.e.    x = z x1 &amp; R(z, x2) &amp; y = x2
+x1 for some z, x1, x2;
+<P>
+ld*(x, y) - y is left derivable from x;
+<P>
+gld(x) - the set of all sententional forms left derivable from
+x           
+<P>
+           (  ld*(x, y)  y in gld(x)); gld(x) = ind(seq(V), ld,
+x) );
+<P>
+qemp(x) - x is &quot;quasiempty&quot;, i.e. the empty sequence
+is derivable from x;
+<P>
+F(z) - the set of first symbols of the left sententional forms
+derivable from  z, 
+<P>
+                 i.e. z1 in F(z)  E[x:seq(V), ld*([z], [z1]^x)]
+<P>
+       ( or z1 in F(z)  E[x:seq(V), [z1]^x in ind(seq(V), ld,
+x)] );
+<P>
+H(z1,z) - there exists a rule of the form (z1, x1 z x2) for some
+x1,x2 and x1 is quasiempty.
+<P>
+gh(z) - the set ind(V, H, z)    (i.e. z1 in gh(z) == gh*(z, z1))
+<P>
+   Note that the definition of F(z) cannot be used for calculation
+of F(z) because the set seq(V) is infinite. The main purpose of
+this section is to present a Veda proof of the following Theorem
+1. For any z in V      F(z) = ind(V, H, z).
+<P>
+   It means that we can  calculate F(z) in the following way:
+<P>
+1) Calculate the relation H on the finite set V;
+<P>
+2) Calculate the reflexive transitive closure G of the relation
+H. 
+<P>
+3) Calculate F(z) as {a:V | G(z,a).
+<P>
+   Representing G as a function Q from V to P(V), i.e.  Q(z) =
+{a:V | G(z,a)}  we have   F(z) = Q(z). Because V is a finite set
+this method of calculation of F(z) is feasible. To prove the theorem
+it is sufficient to prove the following two lemmas:
+<P>
+Lemma 1  For any A in V, z in ind(V,H,A)   z is in F(A),
+<P>
+Lemma 2  For any A in V, z in F(A)   z is in ind(V,H,A). <br>
+ (really Lemmas 2 and 3 below)
+   
+<P>
+   The following obvious facts from the theory of context-free
+grammars  and from the theory of finite sequences are used: 
+<P>
+ 1) If [z1] = x1^[z]^x2 then x1 = eps(V), z = z1 and x2 = eps(V);
+                          (AX1)
+<P>
+ 2) The empty sequence eps(V) is quasiempty (i.e. qemp(eps(V))
+is true);                (AX2)
+<P>
+ 3) If x1^x2 = y1^[z]^y2 then 
+<P>
+      x1 = h1^[z]^h2 and h1 = y1 and h2^x2 = y2   or
+<P>
+      x2 = g1^[z]^g2 and x1^g1 = y1 &amp; g2 = y2  for some h1,h2,g1,g2;
+                   (TS12) 
+<P>
+ 4) If the sequence x1^x2 is quasiempty then x1 and x2 are both
+quasiempty      
+<P>
+        (i.e.  qemp(x1^x2) -&gt; qemp(x1) &amp; qemp(x2) );  
+                                           (TS14)
+<P>
+ 5) If (z, x) is a grammar rule and x is quasiempty then [z] is
+also quasiempty 
+<P>
+         (i.e.  R(z, x) &amp; qemp(x)   qemp([z]).           
+                                       (TCFG10)
+<P>
+   Below are the listings of the files cfg.v and cfglem1.v  containing
+definitions of  basic notions of the theory of context-free grammars
+ and a proof of Lemma 1(for brevity a proof of Lemma 2  has been
+omitted). The time of checking these modules was about       1
+min. on a 486SX25.
+<P>
+------------------------------------------------------------------file
+cfg.v                       
+<P>
+definition module cfg;  -- context-free grammar              
+<P>
+use snam ;
+<P>
+[          -- &quot;--&quot; means that the text from this place
+to the end of the line is a comment
+<P>
+B:set!C:set;
+<P>
+xx:seq1(V)!x:seq(V)!y:seq(V)!A:VN!z:V!z1:V;         -- P(V) is
+the set of all   subsets of V
+<P>
+cfg := def[V:set, VN:P(V), VT:P(V), RS:P(Rule), S:VN;
+<P>
+    VN + VT = V | VN * VT = {} | V in finset | RS in finset ]d;
+<P>
+Rule := M[def[lp:VN, rp: seq(V)]d];
+<P>
+def[R: fn([V, seq(V)], bool); R(z, x) == E[r:RS, r.lp = z &amp;
+r.rp = x]]d;
+<P>
+def[ld: fn([seq(V), seq(V)], bool); ld(x, y) ==
+<P>
+   E[z:V!x1:seq(V)!x2:seq(V), x=[z]^x1 &amp; R(z,x2) &amp; y=x2^x1]]d;
+<P>
+def[gld: fn(seq(V), P(seq(V)));   gld(x) = ind(seq(V),ld, x)]d;
+    
+<P>
+def[F: fn(V, P(V)); axF:= z in F(z1) == E[x:seq(V), [z]^x in gld([z1])]
+]d;
+<P>
+def[H: fn([V, V], bool); H(z1,z) == E[x1:seq(V)!x2:seq(V), R(z1,
+x1^[z]^x2) &amp;   
+<P>
+                                                             
+                                    qemp(x1)]]d;
+<P>
+def[gh: fn(V, P(V)); gh(z) = ind(V, H, z)]d;
+<P>
+def[qemp: fn(seq(V), bool);  qemp(x) == eps in gld(x)]d;    --
+eps is the empty sequence
+<P>
+def[P: fn([V, seq(V)], bool); A[x:seq(V)!A:V, P(A,x) == A[x1:seq(V)!x2:seq(V)!z:V;
+<P>
+                                                             
+                                       x = x1^[z]^x2 &amp; qemp(x1)
+-&gt; z in gh(A)]]]d;
+<P>
+cfglem1 := A[A:V!z:ind(V,H,A), z in F(A)];
+<P>
+cfglem2 := A[A:V!z:V, z in F(A) -&gt; z in ind(V,H,A)];
+<P>
+] -- end
+<P>
+---------------------------------------------------------end of
+file cfg.v
+<P>
+------------------------------------------------------------file
+cfglem1.v
+<P>
+-- cfglem1 := A[A:V!z:ind(H,A), z in F(A)]    
+<P>
+proof module cfglem1;
+<P>
+use cfg , snam ;
+<P>
+[
+<P>
+B:set!x:seq(V)!C:V;
+<P>
+def[axind:any;   -- TR and TQ are obvious facts from the theory
+of CFG
+<P>
+        TR := A[z:V!x:seq(V)!y:seq(V)!g:seq(V),
+<P>
+            [z]^x in gld(y) &amp; R(z,g) -&gt; g^x in gld(y)]
+ |
+<P>
+        TQ := A[x:seq(V)!y:seq(V)!g:seq(V), x^y in gld(g) &amp;
+qemp(x) -&gt; y in gld(g)]]d;
+<P>
+D := def[A:V, z:ind(V,H,A), z1:V; z in F(A) | H(z,z1)]d;
+<P>
+proof([cfglem1; relind(cfglem1, basis, D, step, 2);  -- 2 is the
+number of ind var
+<P>
+FB1 := x in gld(x);     simplify(FB1); --  logic(FB1,gld,axind);
+<P>
+FB2 := [C]^eps(V) in gld([C]);     simplify(FB2);
+<P>
+basis := A[A:V, A in F(A)];     simplify(basis);
+<P>
+step := z1 in F(A);
+<P>
+F1 := E[x:seq(V), seq(V)[z]^x in gld([A])]; MP(F1, F, z in F(A));
+<P>
+   def[x: seq(V); F2 := seq(V)[z]^x in gld([A])]d;
+<P>
+F3 := E[x1:seq(V)!x2:seq(V), R(z, x1^[z1]^x2) &amp; qemp(x1)];
+<P>
+                     MP(F3, H, H(z,z1));
+<P>
+ def[x1,x2: seq(V); F4 := R(z, x1^[z1]^x2) &amp; qemp(x1)]d;
+<P>
+F5 := (x1^[z1]^x2)^x in gld([A]); logic(F5,F2,F4,TR);
+<P>
+F6 := x1^([z1]^(x2^x)) in gld([A]); assn(F6, snam. ^, F5);
+<P>
+F7 := [z1]^(x2^x) in gld([A]); logic(F7, F6, qemp(x1), TQ);
+<P>
+     logic(step, F7, F)
+<P>
+     ]) -- end proof
+<P>
+] -- end cfglem1
+<P>
+-------------------------------------------------------end of
+file cfglem1.v<BR>
+
+<hr><pre>
+-- cfglem2 := A[A:V!z:V, z in F(A) -> z in gh(A)];
+
+proof module cfglem2;   -- time = 18 sec.
+
+use cfg , snam ;
+
+[
+ C:set!xc:seq(C);
+ cfglem2 := A[A:V!z:V, z in F(A) -> z in ind(V,H,A)];
+ cfglem3 := A[A:V!x:gld([A]), P(A, x)];
+ def[eps: fn(t:set, seq(t)); axeps1 := eps(C)^xc = xc |
+			     axeps2 := xc^eps(C) = xc |
+			     axeps3 := l(xc) = 0      |
+			  axqempeps := qemp(eps(C))   
+			      ]d;
+def[P: fn([V, seq(V)], bool);
+    A[x:seq(V)!A:V,  P(A,x) ==
+ A[x1:seq(V)!x2:seq(V)!z:V; x = x1^[z]^x2 & qemp(x1) -> z in gh(A)]]
+   ]d;
+ b:bool!b1:bool!b2:bool;
+
+ proof([ cfglem2;
+
+ -- F0 := (b & true) = b; simplify(F0);
+
+ suppose(cfglem3);  
+
+ F1 := A[A:V!x:gld([A]), A[x1:seq(V)!x2:seq(V)!z:V,
+      x=x1^[z]^x2 & qemp(x1) -> z in gh(A)]];
+      logic(F1, cfglem3, P);
+     -- rewrite(F1,[axP], cfglem3);
+
+ F2 := A[A:V!x:gld([A]), A[x2:seq(V)!z:V,
+         x=eps(V)^[z]^x2 & qemp(eps(V)) -> z in gh(A)]];
+          logic(F2, F1);
+
+ F3 := A[A:V!x:gld([A]), A[x2:seq(V)!z:V,
+	 x=[z]^x2  -> z in gh(A)]];
+	 rewrite(F3,[axeps1, axqempeps, (b & true) = b], F2);
+
+ F4 := A[A:V!z:V, A[x:gld([A])!x2:seq(V),
+		    x=[z]^x2 -> z in gh(A)]]; logic(F4,F3);
+
+ F5 := A[A:V!z:V, A[x:seq(V)!x2:seq(V),
+	x in gld([A]) -> (x = [z]^x2  -> z in gh(A))]];
+	logic(F5,F4);
+
+ F6 := A[A:V!z:V, A[x2:seq(V),
+	[z]^x2 in gld([A]) -> z in gh(A)]];
+	logic(F6,F5);
+
+ F7 := A[A:V!z:V, E[x2:seq(V), [z]^x2 in gld([A])]
+		 -> z in gh(A)]; logic(F7,F6);
+
+ F8 := A[A:V!z:V, z in F(A) -> z in gh(A)]; logic(F8,F7,F);
+
+       logic(cfglem2, F8, gh)
+
+   ])  -- end proof
+
+  ] -- end cfglem2
+  </pre>
+<hr>
+<pre>
+-- cfglem3 := A[A:V!x:gld([A]), P1(A, x)]    8/14/96
+proof module cfglem3;            -- time = 86 sec.
+use cfg , snam ;
+
+[
+ d:=A1:V!xx:seq(V)!xx1:seq(V)!xx2:seq(V)!z:V!B:set;
+ def[ax:any;      -- (false or false) = false                |
+
+  AX1:= [A1] = xx1^[z]^xx2 -> A1 = z & xx1=eps(V) & xx2 = eps(V)|
+  AX2:= qemp(eps(B))                                    |
+	z in gh(z)                                      |
+  TS12:= A[x1:seq(V)!x2:seq(V)!y1:seq(V)!y2:seq(V)!z:V;
+	 x1^x2 = y1^[z]^y2 ->
+   E[h1:seq(V)!h2:seq(V), x1 = h1^[z]^h2 & h1 = y1 & h2^x2=y2] or
+   E[g1:seq(V)!g2:seq(V), x2 = g1^[z]^g2 & x1^g1 = y1 & g2=y2] ] |
+  TS14:=A[u:seq(V)!u1:seq(V)!u2:seq(V),
+	    qemp(u1^u2) == qemp(u1) & qemp(u2)] |
+  TCFG10 := A[z:V!x:seq(V),R(z,x)&qemp(x) -> qemp([z])]
+   ]d;   -- end ax
+
+ D1 := def[A:V,x:gld([A]), y:seq(V); P1(A, x) | ld(x,y)]d,
+ proof([cfglem3;  relind(cfglem3, basis, D1, step, 2);
+ basis := A[A:V, P1(A, [A])]; logic(basis,AX1,AX2,z in gh(z));
+ step  := P1(A,y);
+  proofr([ step;
+
+  F1 := E[y1:seq(V)!y2:seq(V)!z1:V,
+     y = y1^[z1]^y2 & qemp(y1) & ~(z1 in gh(A))]; logic(F1, ~step);
+  def[y1:seq(V), y2:seq(V), z1:V;
+       y = y1^[z1]^y2 & qemp(y1) & ~(z1 in gh(A))]d;
+	
+  F2 := E[z:V!x1:seq(V)!x2:seq(V), x = [z]^x1 & R(z,x2) &
+		      y = x2^x1 ];    MP(F2, ld, ld(x,y));
+  def[z:V, x1:seq(V), x2:seq(V); x = [z]^x1 & R(z,x2) &
+	  y = x2^x1 ]d;   
+
+  F3 := x2^x1 = y1^[z1]^y2; logic(F3,y=y1^[z1]^y2,y=x2^x1);
+
+  F4 := E[h1:seq(V)!h2:seq(V), x2 = h1^[z1]^h2 & h1 = y1 & h2^x1=y2];
+
+  F5 := E[g1:seq(V)!g2:seq(V), x1 = g1^[z1]^g2 & x2^g1=y1 & g2=y2];
+
+
+   proofr([ ~F5;
+	    
+   H0 :=    ~(z1 in gh(A));  simplify(H0);
+
+   def[g1:seq(V),g2:seq(V); x1 = g1^[z1]^g2 & x2^g1=y1 & g2=y2]d;
+
+   H1 := x = [z]^(g1^[z1]^g2); logic(H1, x = [z]^x1, g1);
+
+   H2 := qemp(x2); logic(H2, qemp(y1), x2^g1 = y1, TS14);
+
+   H3 := qemp([z]); logic(H3, qemp(x2), R(z, x2), TCFG10);
+
+   H4 := x = ([z]^g1)^[z1]^g2; assn(H4, snam. ^, H1);
+
+   H5 := qemp(g1); logic(H5, qemp(y1), x2^g1 = y1, TS14);
+
+   H6 := qemp([z]^g1); logic(H6, H3, H5, TS14);
+
+	 logic(z1 in gh(A) ,H4,  H6, P1(A,x) );
+
+   contradiction(H0, z1 in gh(A))
+   ]);  -- end proofr(~F5);
+
+
+   proofr([ ~F4;
+
+   G0 :=    ~(z1 in gh(A));  simplify(G0);
+   def[h1:seq(V),h2:seq(V); x2 = h1^[z1]^h2 & h1 = y1 & h2^x1=y2]d;
+
+   G1 := R(z, h1^[z1]^h2); logic(G1, R(z,x2), x2 = h1^[z1]^h2);
+
+   G2 := qemp(h1);   logic(G2, qemp(y1), h1 = y1);
+
+   G3 := H(z,z1);    logic(G3, H, G1, G2);
+
+   G41:= A[x1:seq(V)!x2:seq(V)!z:V;
+     x = x1^[z]^x2 & qemp(x1) -> z in gh(A)]; MP(G41, P1, P1(A, x));
+
+   G4 := z in gh(A); MP(G4, G41, x = eps(V)^[z]^x1 & qemp(eps(V)));
+
+   G5 := z1 in gh(A); logic(G5, G3, G4, gh, axinds);
+
+   contradiction(G0, G5)
+
+   ]);  -- end proofr(~F4)
+
+    simplify(~F6, 3, F6);
+
+  F6 := F4 or F5;      MP(F6, TS12, F3);
+
+  contradiction( F6, ~F6)
+
+  ])  -- end proofr(step)
+ ])  -- end proof(cfglem3)
+]  -- end cfglem3
+</pre>
+<hr>
+
+<a name="conclusion"></a>
+<P>
+<B>11. Conclusion<BR>
+</B>
+<P>
+<B>   </B>Recently David Parnas wrote : &quot; We need a lot more
+work on notation. The notation that is purveyed by most formal
+methods researchers is cumbersome and hard to read. Even the best
+notation I know  ... is inadequate&quot; [Pa96].
+<P>
+   The project Veda should be considered mostly as an attempt
+to find new simple and practically useful notations. Some of such
+notations have been described in this paper (such as definitions,
+M[d] and model terms d(a, b, ... , c)  ). Practical experience
+of work with these new notations (both their implementation in
+a high-level proof-checking system and using them for specifying
+a rather difficult practical problem) have shown that these notations
+are implementable and practically useful.  <BR>
+
+<a name="references"></a>
+<P>
+<B><FONT SIZE=3>References<BR>
+</FONT></B>
+<P>
+<FONT SIZE=3>[Ah72]  A.V. Aho, J.D. Ullman The Theory of Parsing,
+Translation and Compiling, vol. 1. Prentice-Hall: 1972.</FONT>
+<P>
+<FONT SIZE=3>[Ba90]  R.C. Backhouse. Constructive Type Theory:
+A Perspective from Computing Science, in: </FONT>
+<P>
+<FONT SIZE=3>             E.W. Dijkstra (ed.). Formal Development
+of Programs and Proof, Addison-Wesley: 1990.</FONT>
+<P>
+<FONT SIZE=3>[Bo88]  R.S. Boyer, J.S. Moore. A Computational Logic
+Handbook.  Academic Press: 1988.</FONT>
+<P>
+<FONT SIZE=3>[Co86]  R.L. Constable, S.F. Allen, H.M. Bromely
+et al. Implementing Mathematics with the Nurpl Development System. 
+Prentice-Hall:1986.</FONT>
+<P>
+<FONT SIZE=3>[Di96]   D.L. Dill, J. Rushby. Acceptance of Formal
+Methods: Lessons from Hardware Design. 
+IEEE Computer, April 1996, pp.23-24.</FONT>
+<P>
+<FONT SIZE=3>[Gl72]   V. M. Glushkov,  Yu. V. Kapitonova,  A.A.
+Letichevskiy  et. al. Toward constructing a practical formal 
+mathematical language for writing mathematical theories. 
+Kibernetika, 1972, No. 5.</FONT>
+<P>
+<FONT SIZE=3>[Go93]  M.J.C. Gordon and T.F. Melham (eds). Introduction
+to HOL. Cambridge University Press: 1993.</FONT>
+<P>
+<FONT SIZE=3>[Gu93]  J.V. Guttag, J.J. Horning. Larch: languages
+and tools for formal specification. Springer-Verlag: 1993.</FONT>
+<P>
+<FONT SIZE=3>[Hi70]  D. Hilbert und P. Bernays. Grundlagen der
+Mathematik, 2nd  ed., volume 2,  Springer-Verlag: 1970.</FONT>
+<P>
+<FONT SIZE=3>[Jo90]  C.B. Jones.  Systematic Software Construction
+using VDM.  Prentice Hall: 1990.</FONT>
+<P>
+<FONT SIZE=3>[Jo91]  C.B. Jones, K.D.Jones, P. A. Lindsay, R.
+Moore.  Mural: A Formal Development Support system, 
+Springer-Verlag: 1991.</FONT>
+<P>
+<FONT SIZE=3>[Ko92] A.M. Koelmans, F.P. Burns, D.J. Kinniment.
+Use of a Theorem Prover for Transformational Synthesis, in: G. Taylor, 
+G. Russel(eds.).  Algorithmic and knowledge based CAD for VLSI. 
+Peter Peregrinus Ltd.: 1992, pp. 24-46.</FONT>
+<P>
+<FONT SIZE=3>[Ma92]  V.P. Makarov. MSL - A Mathematical Specification
+Language. Lecture Notes in Computer Science, vol. 620, 1992, 
+pp. 305-313.</FONT>
+<P>
+<FONT SIZE=3>[Me88]  Bertrand Meyer. Object-Oriented Software
+Construction. Prentice-Hall: 1988.</FONT>
+<P>
+<FONT SIZE=3>[Pa96]   David  Parnas.  Mathematical methods: what
+we need and don't need. IEEE Computer, April 1996,   pp.28-29.</FONT>
+<P>
+<FONT SIZE=3>[Ru92]  Piotr Rudnicki. An Overview of the MIZAR
+Project. Proceedings  of the 1992 Workshop on Types for Proofs and Programs, 
+Chalmer University of Technology, Bastad: 1992.</FONT>
+<P>
+<FONT SIZE=3>[Ru96]  John Rushby. Automated Deduction and Formal
+Methods. Invited lecture at joint plenary session of  13th International 
+Conference on Automated Deduction and 8th International Conference on 
+Computer-Aided  Verification. Rutgers University, August 2, 1996.</FONT>
+<P>
+<FONT SIZE=3>[Sp92]  J.M. Spivey.  The Z  notation: A Reference
+Manual.  Prentice Hall: 1992.<BR>
+</FONT>
+<P>
+<FONT SIZE=2>10/5/96</FONT>
+</BODY>
+
+</HTML>

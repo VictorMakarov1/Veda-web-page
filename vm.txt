@@ -1,0 +1,433 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns:st1="urn:schemas-microsoft-com:office:smarttags"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=us-ascii">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 10">
+<meta name=Originator content="Microsoft Word 10">
+<link rel=File-List href="vm_files/filelist.xml">
+<link rel=Edit-Time-Data href="vm_files/editdata.mso">
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+w\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+</style>
+<![endif]-->
+<title> Home Page of V. P. Makarov </title>
+<o:SmartTagType namespaceuri="urn:schemas-microsoft-com:office:smarttags"
+ name="PlaceType"/>
+<o:SmartTagType namespaceuri="urn:schemas-microsoft-com:office:smarttags"
+ name="PlaceName"/>
+<o:SmartTagType namespaceuri="urn:schemas-microsoft-com:office:smarttags"
+ name="place"/>
+<o:SmartTagType namespaceuri="urn:schemas-microsoft-com:office:smarttags"
+ name="City"/>
+<o:SmartTagType namespaceuri="urn:schemas-microsoft-com:office:smarttags"
+ name="State"/>
+<o:SmartTagType namespaceuri="urn:schemas-microsoft-com:office:smarttags"
+ name="PersonName"/>
+<o:SmartTagType namespaceuri="urn:schemas-microsoft-com:office:smarttags"
+ name="country-region"/>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>Victor</o:Author>
+  <o:Template>Normal</o:Template>
+  <o:LastAuthor>Victor</o:LastAuthor>
+  <o:Revision>2</o:Revision>
+  <o:TotalTime>185</o:TotalTime>
+  <o:Created>2003-05-22T02:56:00Z</o:Created>
+  <o:LastSaved>2003-05-22T02:56:00Z</o:LastSaved>
+  <o:Pages>1</o:Pages>
+  <o:Words>538</o:Words>
+  <o:Characters>3072</o:Characters>
+  <o:Company>Makarov Enterprises</o:Company>
+  <o:Lines>25</o:Lines>
+  <o:Paragraphs>7</o:Paragraphs>
+  <o:CharactersWithSpaces>3603</o:CharactersWithSpaces>
+  <o:Version>10.2625</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:BrowserLevel>MicrosoftInternetExplorer4</w:BrowserLevel>
+ </w:WordDocument>
+</xml><![endif]--><!--[if !mso]><object
+ classid="clsid:38481807-CA0E-42D2-BF39-B33AF135CC4D" id=ieooui></object>
+<style>
+st1\:*{behavior:url(#ieooui) }
+</style>
+<![endif]-->
+<style>
+<!--
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:purple;
+	text-decoration:underline;
+	text-underline:single;}
+p
+	{mso-margin-top-alt:auto;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+@page Section1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.25in 1.0in 1.25in;
+	mso-header-margin:.5in;
+	mso-footer-margin:.5in;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+ /* List Definitions */
+ @list l0
+	{mso-list-id:237638468;
+	mso-list-type:hybrid;
+	mso-list-template-ids:324802146 67698703 67698713 67698715 67698703 67698713 67698715 67698703 67698713 67698715;}
+@list l0:level1
+	{mso-level-start-at:6;
+	mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l1
+	{mso-list-id:1535998180;
+	mso-list-type:hybrid;
+	mso-list-template-ids:1049506124 67698703 67698713 67698715 67698703 67698713 67698715 67698703 67698713 67698715;}
+@list l1:level1
+	{mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l1:level2
+	{mso-level-tab-stop:1.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l1:level3
+	{mso-level-tab-stop:1.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l1:level4
+	{mso-level-tab-stop:2.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l1:level5
+	{mso-level-tab-stop:2.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l1:level6
+	{mso-level-tab-stop:3.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l1:level7
+	{mso-level-tab-stop:3.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l1:level8
+	{mso-level-tab-stop:4.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l1:level9
+	{mso-level-tab-stop:4.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+ol
+	{margin-bottom:0in;}
+ul
+	{margin-bottom:0in;}
+-->
+</style>
+<!--[if gte mso 10]>
+<style>
+ /* Style Definitions */
+ table.MsoNormalTable
+	{mso-style-name:"Table Normal";
+	mso-tstyle-rowband-size:0;
+	mso-tstyle-colband-size:0;
+	mso-style-noshow:yes;
+	mso-style-parent:"";
+	mso-padding-alt:0in 5.4pt 0in 5.4pt;
+	mso-para-margin:0in;
+	mso-para-margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	font-family:"Times New Roman";}
+</style>
+<![endif]--><!--[if gte mso 9]><xml>
+ <o:shapedefaults v:ext="edit" spidmax="4098"/>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <o:shapelayout v:ext="edit">
+  <o:idmap v:ext="edit" data="1"/>
+ </o:shapelayout></xml><![endif]-->
+</head>
+
+<body lang=EN-US link=blue vlink=purple style='tab-interval:.5in'>
+
+<div class=Section1>
+
+<p class=MsoNormal style='tab-stops:261.0pt'><!--[if gte vml 1]><v:shapetype
+ id="_x0000_t75" coordsize="21600,21600" o:spt="75" o:preferrelative="t"
+ path="m@4@5l@4@11@9@11@9@5xe" filled="f" stroked="f">
+ <v:stroke joinstyle="miter"/>
+ <v:formulas>
+  <v:f eqn="if lineDrawn pixelLineWidth 0"/>
+  <v:f eqn="sum @0 1 0"/>
+  <v:f eqn="sum 0 0 @1"/>
+  <v:f eqn="prod @2 1 2"/>
+  <v:f eqn="prod @3 21600 pixelWidth"/>
+  <v:f eqn="prod @3 21600 pixelHeight"/>
+  <v:f eqn="sum @0 0 1"/>
+  <v:f eqn="prod @6 1 2"/>
+  <v:f eqn="prod @7 21600 pixelWidth"/>
+  <v:f eqn="sum @8 21600 0"/>
+  <v:f eqn="prod @7 21600 pixelHeight"/>
+  <v:f eqn="sum @10 21600 0"/>
+ </v:formulas>
+ <v:path o:extrusionok="f" gradientshapeok="t" o:connecttype="rect"/>
+ <o:lock v:ext="edit" aspectratio="t"/>
+</v:shapetype><v:shape id="_x0000_s1026" type="#_x0000_t75" alt="" style='position:absolute;
+ margin-left:0;margin-top:0;width:107.25pt;height:153.75pt;z-index:1;
+ mso-wrap-distance-left:0;mso-wrap-distance-right:0;mso-position-horizontal:left;
+ mso-position-vertical-relative:line' o:allowoverlap="f">
+ <v:imagedata src="6.jpg"/>
+ <w:wrap type="square"/>
+</v:shape><![endif]--><![if !vml]><img width=143 height=205 src=6.jpg
+align=left v:shapes="_x0000_s1026"><![endif]><span
+style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><b style='mso-bidi-font-weight:normal'><span style='font-size:16.0pt'>Victor
+Makarov<span
+style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></b>(<st1:PersonName>ViktorMakarov@hotmail.com</st1:PersonName>)<b
+style='mso-bidi-font-weight:normal'><span style='font-size:16.0pt'><o:p></o:p></span></b></p>
+
+<p class=MsoNormal><span
+style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></p>
+
+<p class=MsoNormal><span
+style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+style='font-size:14.0pt'>1946:<span style='mso-spacerun:yes'>&nbsp;&nbsp;
+</span>Born in the </span><st1:place><st1:PlaceType><span style='font-size:
+  14.0pt'>village</span></st1:PlaceType><span style='font-size:14.0pt'> of </span><st1:PlaceName><span
+  style='font-size:14.0pt'>Vol&#8217;no-Chernikhovo</span></st1:PlaceName></st1:place><span
+style='font-size:14.0pt'> <o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt'><span
+style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>(Brest region, until 1939 &#8211; Poland, then Soviet Union, now
+Belarus).<o:p></o:p></span></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt'><span
+style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp; </span>1968:<span
+style='mso-spacerun:yes'>&nbsp;&nbsp; </span>A master degree in mathematics
+from </span><st1:place><st1:PlaceName><span style='font-size:14.0pt'>Minsk</span></st1:PlaceName><span
+ style='font-size:14.0pt'> </span><st1:PlaceType><span style='font-size:14.0pt'>State</span></st1:PlaceType><span
+ style='font-size:14.0pt'> </span><st1:PlaceType><span style='font-size:14.0pt'>University</span></st1:PlaceType></st1:place><span
+style='font-size:14.0pt'> (</span><st1:country-region><st1:place><span
+  style='font-size:14.0pt'>Belarus</span></st1:place></st1:country-region><span
+style='font-size:14.0pt'>).<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt'><span
+style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp; </span>1967-1973: A software
+engineer at </span><st1:City><st1:place><span style='font-size:14.0pt'>Novosibirsk</span></st1:place></st1:City><span
+style='font-size:14.0pt'> (</span><st1:country-region><st1:place><span
+  style='font-size:14.0pt'>Russia</span></st1:place></st1:country-region><span
+style='font-size:14.0pt'>).<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt'><span
+style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>(Computing </span><st1:place><st1:PlaceType><span style='font-size:14.0pt'>Center</span></st1:PlaceType><span
+ style='font-size:14.0pt'> of </span><st1:PlaceName><span style='font-size:
+  14.0pt'>Siberian</span></st1:PlaceName></st1:place><span style='font-size:
+14.0pt'> Division of </span><st1:place><st1:PlaceName><span style='font-size:
+  14.0pt'>Russian</span></st1:PlaceName><span style='font-size:14.0pt'> </span><st1:PlaceType><span
+  style='font-size:14.0pt'>Academy</span></st1:PlaceType></st1:place><span
+style='font-size:14.0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt'><span
+style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>Of
+Sciences and some other places).<o:p></o:p></span></p>
+
+<p class=MsoNormal><span
+style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt'>1973-1992: A senior research
+associate at Gomel Division of Institute of <o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt'><span
+style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>Mathematics
+of </span><st1:place><st1:PlaceName><span style='font-size:14.0pt'>Belarussian</span></st1:PlaceName><span
+ style='font-size:14.0pt'> </span><st1:PlaceType><span style='font-size:14.0pt'>Academy</span></st1:PlaceType></st1:place><span
+style='font-size:14.0pt'> of Sciences (BAN) (</span><st1:place><st1:City><span
+  style='font-size:14.0pt'>Gomel</span></st1:City><span style='font-size:14.0pt'>,
+ </span><st1:country-region><span style='font-size:14.0pt'>Belarus</span></st1:country-region></st1:place><span
+style='font-size:14.0pt'>).<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt'>1987:<span
+style='mso-spacerun:yes'>&nbsp;&nbsp; </span>A Ph. D. in Computer Science from
+the </span><st1:place><st1:PlaceType><span style='font-size:14.0pt'>Institute</span></st1:PlaceType><span
+ style='font-size:14.0pt'> of </span><st1:PlaceName><span style='font-size:
+  14.0pt'>Mathematics</span></st1:PlaceName></st1:place><span style='font-size:
+14.0pt'> of BAN (</span><st1:place><st1:City><span style='font-size:14.0pt'>Minsk</span></st1:City><span
+ style='font-size:14.0pt'>, </span><st1:country-region><span style='font-size:
+  14.0pt'>Belarus</span></st1:country-region></st1:place><span
+style='font-size:14.0pt'>).<span style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;
+</span><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt'>1992:<span
+style='mso-spacerun:yes'>&nbsp;&nbsp; </span>Moved to </span><st1:country-region><st1:place><span
+  style='font-size:14.0pt'>USA</span></st1:place></st1:country-region><span
+style='font-size:14.0pt'> (</span><st1:place><st1:City><span style='font-size:
+  14.0pt'>Brooklyn</span></st1:City><span style='font-size:14.0pt'>, </span><st1:State><span
+  style='font-size:14.0pt'>New York</span></st1:State></st1:place><span
+style='font-size:14.0pt'>).<span
+style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt'>1993-current (2003): An
+independent software consultant, but also trying to finish a research<span
+style='mso-spacerun:yes'>&nbsp;&nbsp; </span>project (design and implementation
+of a formal mathematical language) which I began before my emigration.<span
+style='mso-spacerun:yes'>&nbsp;&nbsp; </span><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt'>_________________________________________________________________________<o:p></o:p></span></p>
+
+<p class=MsoNormal align=center style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+auto;text-align:center'><span style='font-size:16.0pt'>Research interests<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto'><span
+style='font-size:14.0pt'>Practical formal logical systems, Formal methods in
+software development, Mechanized mathematics<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto'><span
+style='font-size:14.0pt'>_________________________________________________________________________<o:p></o:p></span></p>
+
+<p class=MsoNormal align=center style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+auto;text-align:center'><span style='font-size:16.0pt'>Affiliations<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto'><span
+style='font-size:14.0pt'>I am a member of the Association for Symbolic Logic (<a
+href="http://www.aslonline.org/">http://www.aslonline.org/</a>), the
+Association for Automated Reasoning (<a href="http://www-unix.mcs.anl.gov/AAR/">http://www-unix.mcs.anl.gov/AAR/</a>)
+and the Foundations of Mathematics (FOM) closed e-mail list (<a
+href="http://www.cs.nyu.edu/mailman/listinfo/fom/">http://www.cs.nyu.edu/mailman/listinfo/fom/</a>).<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto'><span
+style='font-size:14.0pt'>_________________________________________________________________________<o:p></o:p></span></p>
+
+<p class=MsoNormal align=center style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+auto;text-align:center'><span style='font-size:16.0pt'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=center style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+auto;text-align:center'><span style='font-size:16.0pt'>My main publications<o:p></o:p></span></p>
+
+<p class=MsoNormal align=center style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+auto;text-align:center'><span style='font-size:16.0pt'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+margin-left:.25in'><span style='font-size:14.0pt'>[1] AIST-0 </span><span
+style='font-size:14.0pt;font-family:Symbol;mso-ascii-font-family:"Times New Roman";
+mso-hansi-font-family:"Times New Roman";mso-char-type:symbol;mso-symbol-font-family:
+Symbol'><span style='mso-char-type:symbol;mso-symbol-font-family:Symbol'>-</span></span><span
+style='font-size:14.0pt'> An Operating System (in Russian),co-authors: Golosov
+I.S., Pottosin I.V.. Proceedings of 2<sup>nd</sup> All-Union Conference on
+Software Engineering, </span><st1:City><st1:place><span style='font-size:14.0pt'>Novosibirsk</span></st1:place></st1:City><span
+style='font-size:14.0pt'>, 1970. <o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+margin-left:.25in'><span style='font-size:14.0pt'>[2] An Automatic Programming System
+for ALGOL-M (in Russian), co-authors: Gusev V., Lavrent&#8217;ev V., Cherkasov
+S. Proceedings of <span style='mso-spacerun:yes'>&nbsp;</span>Conference on
+Management Information Systems, Novosibirsk, 1972. <o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+margin-left:.25in'><span style='font-size:14.0pt'>[3] Toward a Theory of
+Abstract Algorithms (in Russian), Nauchno-technicheskaya informatsiya, ser.2,
+1982, N9, pp.35-40.<span style='mso-spacerun:yes'>&nbsp;&nbsp; </span><a
+href="AbsTowards.htm">English abstract</a> <span
+style='mso-spacerun:yes'>&nbsp;</span><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+margin-left:.25in'><span style='font-size:14.0pt'><a href="thabsalg1.jif.GIF">page
+1..GIF</a><span style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp; </span><a
+href="thabsalg2.jig.GIF">page 2.GIF</a><span
+style='mso-spacerun:yes'>&nbsp;&nbsp; </span><a href="thabsalg3.gif.GIF">page 3.GIF</a><span
+style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp; </span><a href="thabsalg4.jif.GIF">page
+4.GIF</a><span style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp; </span><a
+href="thabsalg5.jif.GIF">page 5.GIF</a><span
+style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp; </span><a href="thabsalg6.jif.GIF">page
+6.GIF</a> <o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+margin-left:.25in'><span style='font-size:14.0pt'>[4] Automatic Construction of
+Syntactic and Semantic Analyzers (in Russian). My Ph. D. Dissertation. </span><st1:place><st1:PlaceType><span
+  style='font-size:14.0pt'>Institute</span></st1:PlaceType><span
+ style='font-size:14.0pt'> of </span><st1:PlaceName><span style='font-size:
+  14.0pt'>Mathematics</span></st1:PlaceName></st1:place><span style='font-size:
+14.0pt'> of </span><st1:place><st1:PlaceName><span style='font-size:14.0pt'>Belarussian</span></st1:PlaceName><span
+ style='font-size:14.0pt'> </span><st1:PlaceType><span style='font-size:14.0pt'>Academy</span></st1:PlaceType></st1:place><span
+style='font-size:14.0pt'> of Sciences, </span><st1:City><st1:place><span
+  style='font-size:14.0pt'>Minsk</span></st1:place></st1:City><span
+style='font-size:14.0pt'>, 1987. I used LR(1)-grammars for syntax and<span
+style='mso-spacerun:yes'>&nbsp; </span>(&#8220;quasi&#8221;-)attribute grammars
+for semantics. The system was written in PL/1.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+margin-left:.25in'><span style='font-size:14.0pt'>[5] MSL &#8211; A
+Mathematical Specification Language, in:<span style='mso-spacerun:yes'>&nbsp;
+</span>&#8220;Logical Foundations of Computer Science &#8211;
+Tver&#8217;92&#8221;(Lecture Notes in Computer Science, Vol. 620 (1992), pp.
+305-313.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+margin-left:.25in'><span style='font-size:14.0pt'>[6] Predicate Logic with
+Definitions (1999), see: <a href="http://xxx.lanl.gov/abs/cs.LO/9906010">http://xxx.lanl.gov/abs/cs.LO/9906010</a><span
+style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp; </span><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+margin-left:.25in'><span style='font-size:14.0pt'><a href="DL-alg.htm">[7] Predicate
+Logic with Definitions and the General Concept of Algorithm (2003)</a>, also see:
+<a href="http://www.mathpreprints.com/math/Preprint/VM/20030503/1/">http://www.mathpreprints.com/math/Preprint/VM/20030503/1/</a><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+margin-left:.25in'><span style='font-size:14.0pt'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+margin-left:.25in'><span style='font-size:14.0pt'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+margin-left:.25in'><span style='font-size:14.0pt'>_______________________________________________________________________<o:p></o:p></span></p>
+
+</div>
+
+</body>
+
+</html>
